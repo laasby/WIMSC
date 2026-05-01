@@ -8,6 +8,10 @@ let package = Package(
         .library(name: "SCData", targets: ["SCData"]),
     ],
     targets: [
-        .target(name: "SCData", path: "Sources/SCData"),
+        .target(
+            name: "SCData",
+            path: "Sources/SCData",
+            resources: [.process("Resources")]
+        ),
     ]
 )
