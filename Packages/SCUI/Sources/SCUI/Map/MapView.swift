@@ -137,6 +137,7 @@ public struct MapView: View {
             }
         }
         .mapStyle(.standard)
+        .mapControls { }
         .onMapCameraChange(frequency: .onEnd) { context in
             currentRegion = context.region
             regionBinding?.wrappedValue = context.region
@@ -163,15 +164,11 @@ public struct MapView: View {
         VStack(spacing: 0) {
             Spacer()
 
-            // Bottom bar: filter chips + recenter + range ring buttons
-            HStack(alignment: .bottom, spacing: 12) {
+            // Bottom bar: filter chips + recenter button
+            HStack(alignment: .center, spacing: 12) {
                 filterChipsRow
-
-                VStack(spacing: 8) {
-                    rangeRingButton
-                    recenterButton
-                }
-                .padding(.bottom, 4)
+                Spacer()
+                recenterButton
             }
             .padding(.horizontal, 16)
             .padding(.bottom, 96) // above tab bar
