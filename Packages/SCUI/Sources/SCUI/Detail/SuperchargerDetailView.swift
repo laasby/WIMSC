@@ -10,10 +10,6 @@ public struct SuperchargerDetailView: View {
     public let locationService: LocationService
     @State private var viewModel: DetailViewModel
     @State private var showNavigateSheet = false
-    @State private var preconditioningAdvice: PreconditioningAdvice? = nil
-    @State private var availability: StallAvailability? = nil
-    @State private var waitDescription: String = ""
-    @State private var dwellPlan: DwellPlan? = nil
 
     @Environment(LiveAvailabilityStore.self) private var liveStore
     @Environment(\.teslaIsAuthenticated) private var isAuthenticated
@@ -35,14 +31,7 @@ public struct SuperchargerDetailView: View {
                 availabilitySection
                 miniMap
                 specsSection
-                pricingSection
-                amenitiesSection
-                dwellSection
                 weatherSection
-                preconditioningSection
-                if supercharger.country == "NO" {
-                    nordicSection
-                }
                 communitySection
                 footer
             }
@@ -51,28 +40,7 @@ public struct SuperchargerDetailView: View {
         .navigationTitle(supercharger.name)
         .navigationBarTitleDisplayMode(.large)
         .toolbar { navigationButtons }
-        .task {
-            await viewModel.load()
-            if let temp = viewModel.weather?.temperatureCelsius,
-               let dist = viewModel.distanceMetres {
-                preconditioningAdvice = PreconditioningAdvisor.advise(
-                    destination: supercharger,
-                    ambientCelsius: temp,
-                    vehicle: nil,
-                    distanceToChargerKm: dist / 1000
-                )
-            }
-        }
-        .task {
-            let client = AvailabilityClient()
-            availability = await client.fetchAvailability(siteId: supercharger.id, stallCount: supercharger.stallCount)
-            waitDescription = WaitTimePredictor.waitDescription(
-                availability: availability,
-                stallCount: supercharger.stallCount,
-                visitHistory: []
-            )
-            dwellPlan = DwellTimePlanner.plan(supercharger: supercharger)
-        }
+        .task { await viewModel.load() }
         .confirmationDialog(
             "Navigate to \(supercharger.name)",
             isPresented: $showNavigateSheet,
@@ -295,120 +263,6 @@ public struct SuperchargerDetailView: View {
         }
     }
 
-    // MARK: - Pricing section
-
-    private var pricingSection: some View {
-        DetailSection(title: "Pricing") {
-            if let pricing = supercharger.pricing {
-                if let kwh = pricing.perKwh {
-                    DetailRow(
-                        label: "Per kWh",
-                        value: String(format: "%.2f \(pricing.currency)", kwh)
-                    )
-                }
-                if let idle = pricing.idleFee {
-                    DetailRow(
-                        label: "Idle Fee",
-                        value: String(format: "%.2f \(pricing.currency)/min", idle)
-                    )
-                }
-                if let congestion = pricing.congestionFee {
-                    DetailRow(
-                        label: "Congestion Fee",
-                        value: String(format: "%.2f \(pricing.currency)", congestion)
-                    )
-                }
-                if let peak = pricing.peakHours {
-                    DetailRow(label: "Peak Hours", value: peak)
-                }
-                if let notes = pricing.notes {
-                    DetailRow(label: "Notes", value: notes)
-                }
-            } else {
-                Text("Pricing info not available")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .padding(.vertical, 6)
-            }
-        }
-    }
-
-    // MARK: - Amenities section
-
-    private var amenitiesSection: some View {
-        DetailSection(title: "Amenities") {
-            if supercharger.amenities.isEmpty {
-                Text("No amenity data")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .padding(.vertical, 6)
-            } else {
-                ForEach(supercharger.amenities, id: \.self) { amenity in
-                    HStack(spacing: 12) {
-                        Image(systemName: amenitySymbol(amenity))
-                            .foregroundStyle(.secondary)
-                            .frame(width: 20)
-                        Text(amenityLabel(amenity))
-                            .font(.subheadline)
-                        Spacer()
-                    }
-                    .padding(.vertical, 6)
-                    Divider()
-                }
-            }
-        }
-    }
-
-    private func amenityLabel(_ amenity: Amenity) -> String {
-        switch amenity {
-        case .restrooms:      return "Restrooms"
-        case .food:           return "Food"
-        case .coffee:         return "Coffee"
-        case .wifi:           return "Wi-Fi"
-        case .shops:          return "Shops"
-        case .coveredParking: return "Covered Parking"
-        case .pullThrough:    return "Pull-Through"
-        case .lounge:         return "Lounge"
-        }
-    }
-
-    private func amenitySymbol(_ amenity: Amenity) -> String {
-        switch amenity {
-        case .restrooms:      return "toilet"
-        case .food:           return "fork.knife"
-        case .coffee:         return "cup.and.saucer"
-        case .wifi:           return "wifi"
-        case .shops:          return "bag"
-        case .coveredParking: return "car.fill"
-        case .pullThrough:    return "arrow.right.to.line"
-        case .lounge:         return "sofa"
-        }
-    }
-
-    // MARK: - Dwell-time section
-
-    private var dwellSection: some View {
-        Group {
-            if let plan = dwellPlan {
-                DetailSection(title: "While You Charge") {
-                    DwellTimePlannerView(plan: plan)
-                }
-            }
-        }
-    }
-
-    // MARK: - Preconditioning section
-
-    private var preconditioningSection: some View {
-        Group {
-            if let advice = preconditioningAdvice {
-                DetailSection(title: "Preconditioning") {
-                    PreconditioningBannerView(advice: advice)
-                }
-            }
-        }
-    }
-
     // MARK: - Weather section
 
     @ViewBuilder
@@ -485,24 +339,6 @@ public struct SuperchargerDetailView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter.string(from: date)
-    }
-
-    // MARK: - Nordic section
-
-    @ViewBuilder
-    private var nordicSection: some View {
-        DetailSection(title: "Mountain Passes") {
-            Text("Loading...")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .padding(.vertical, 6)
-        }
-        DetailSection(title: "Electricity Prices") {
-            Text("Spot price data available for Norwegian sites.")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .padding(.vertical, 6)
-        }
     }
 
     // MARK: - Community section

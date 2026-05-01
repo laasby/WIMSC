@@ -1,29 +1,20 @@
 import SwiftUI
-import SwiftData
 import SCData
 
 public struct SettingsView: View {
-    @Environment(CloudSyncManager.self) private var cloudSyncManager
-    @Environment(\.modelContext) private var modelContext
     @Environment(\.teslaIsAuthenticated) private var teslaIsAuthenticated
     @Environment(\.teslaSignIn) private var teslaSignIn
     @Environment(\.teslaSignOut) private var teslaSignOut
-    @State private var showSyncRestartAlert = false
-    @State private var tibberToken: String = ""
-    @State private var homeChargerKw: Double = 11
-    @State private var homeZone: NOPriceZone = .no1
+
+    private let appVersion: String = {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0"
+    }()
 
     public init() {}
 
     public var body: some View {
         NavigationStack {
             Form {
-                Section("Vehicles") {
-                    NavigationLink("Manage vehicles") {
-                        VehicleListView(modelContext: modelContext)
-                    }
-                }
-
                 Section("Tesla Account") {
                     if teslaIsAuthenticated {
                         HStack {
@@ -35,8 +26,8 @@ public struct SettingsView: View {
                             }
                         }
                     } else {
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text("Connect your Tesla account for real-time stall availability on the map and in station details.")
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Connect your Tesla account for real-time stall availability.")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                             Button {
@@ -52,59 +43,28 @@ public struct SettingsView: View {
                     }
                 }
 
-                Section("Home Charging") {
-                    HStack {
-                        Text("Charger power (kW)")
-                        Spacer()
-                        TextField("11", value: $homeChargerKw, format: .number)
-                            .keyboardType(.decimalPad)
-                            .multilineTextAlignment(.trailing)
-                            .frame(width: 60)
-                    }
-                    Picker("Price zone", selection: $homeZone) {
-                        ForEach(NOPriceZone.allCases) { zone in
-                            Text(zone.displayName).tag(zone)
-                        }
-                    }
-                    SecureField("Tibber API token (optional)", text: $tibberToken)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                }
-
-                Section("Privacy & Sync") {
-                    Toggle("iCloud Sync", isOn: Binding(
-                        get: { cloudSyncManager.isSyncEnabled },
-                        set: { newValue in
-                            cloudSyncManager.setSyncEnabled(newValue)
-                            showSyncRestartAlert = true
-                        }
-                    ))
-                    NavigationLink("Your Data") {
-                        YourDataView()
-                    }
-                }
-
-                Section {
-                    NavigationLink("Data Sources & Credits") {
-                        CreditsView()
-                    }
-                }
-
-                Section {
+                Section("About") {
                     HStack {
                         Text("Version")
                         Spacer()
-                        Text("1.0")
+                        Text(appVersion)
+                            .foregroundStyle(.secondary)
+                    }
+                    HStack {
+                        Text("Data")
+                        Spacer()
+                        Text("supercharge.info")
+                            .foregroundStyle(.secondary)
+                    }
+                    HStack {
+                        Text("Weather")
+                        Spacer()
+                        Text("MET Norway")
                             .foregroundStyle(.secondary)
                     }
                 }
             }
             .navigationTitle("Settings")
-        }
-        .alert("Restart Required", isPresented: $showSyncRestartAlert) {
-            Button("OK") {}
-        } message: {
-            Text("iCloud sync changes take effect after restarting the app.")
         }
     }
 }

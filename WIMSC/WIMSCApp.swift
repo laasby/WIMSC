@@ -6,15 +6,13 @@ import SCData
 struct WIMSCApp: App {
     private let container: ModelContainer
     @State private var syncEngine: SyncEngine
-    @State private var cloudSyncManager = CloudSyncManager()
     @State private var teslaAuthService = TeslaAuthService()
     @State private var liveAvailabilityStore = LiveAvailabilityStore()
 
     @MainActor
     init() {
-        let mgr = CloudSyncManager()
         do {
-            let c = try ModelContainerFactory.makeContainer(syncManager: mgr)
+            let c = try ModelContainerFactory.makeContainer()
             container = c
             syncEngine = SyncEngine(
                 superchargeClient: SuperchargeInfoClient(),
@@ -24,14 +22,12 @@ struct WIMSCApp: App {
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }
-        _cloudSyncManager = State(wrappedValue: mgr)
     }
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .modelContainer(container)
-                .environment(cloudSyncManager)
                 .environment(liveAvailabilityStore)
                 .environment(\.teslaIsAuthenticated, teslaAuthService.isAuthenticated)
                 .environment(\.teslaSignIn) { [teslaAuthService] in
@@ -56,7 +52,6 @@ struct WIMSCApp: App {
                     if syncEngine.needsSync {
                         await syncEngine.syncAll()
                     }
-                    // Wire token provider if already authenticated from keychain
                     if teslaAuthService.isAuthenticated {
                         liveAvailabilityStore.tokenProvider = { [weak teslaAuthService] in
                             guard let svc = teslaAuthService else { throw TeslaAuthError.notAuthenticated }

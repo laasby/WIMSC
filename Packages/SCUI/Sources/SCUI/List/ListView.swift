@@ -1,48 +1,40 @@
 import SwiftUI
 import SwiftData
 import MapKit
-import CoreLocation
 import SCData
 import SCDomain
 
 public struct ListView: View {
-    // @Query auto-refreshes whenever SwiftData changes (e.g. after remote sync)
-    @Query(sort: \Supercharger.name) private var allSites: [Supercharger]
-
+    @State private var sites: [Supercharger] = []
     @State private var searchText: String = ""
     @State private var filterCriteria: FilterCriteria = .default
     @State private var sortOrder: SCDomain.SortOrder = .distance
     @State private var showFilterSheet: Bool = false
 
     private let locationService: LocationService
+    private let modelContext: ModelContext
     private let visibleRegion: MKCoordinateRegion
 
     public init(locationService: LocationService, modelContext: ModelContext, visibleRegion: MKCoordinateRegion) {
         self.locationService = locationService
+        self.modelContext = modelContext
         self.visibleRegion = visibleRegion
     }
 
-    // Sites in the visible map viewport, filtered + sorted
     private var displayedSites: [Supercharger] {
-        let latMin = visibleRegion.center.latitude  - visibleRegion.span.latitudeDelta  / 2
-        let latMax = visibleRegion.center.latitude  + visibleRegion.span.latitudeDelta  / 2
-        let lngMin = visibleRegion.center.longitude - visibleRegion.span.longitudeDelta / 2
-        let lngMax = visibleRegion.center.longitude + visibleRegion.span.longitudeDelta / 2
-
-        var inViewport = allSites.filter {
-            $0.latitude  >= latMin && $0.latitude  <= latMax &&
-            $0.longitude >= lngMin && $0.longitude <= lngMax
+        guard searchText.isEmpty else {
+            return SuperchargerFilter.apply(
+                sites.filter {
+                    $0.name.localizedCaseInsensitiveContains(searchText) ||
+                    $0.city.localizedCaseInsensitiveContains(searchText)
+                },
+                criteria: filterCriteria,
+                sortBy: sortOrder,
+                userLocation: locationService.currentLocation
+            )
         }
-
-        if !searchText.isEmpty {
-            inViewport = inViewport.filter {
-                $0.name.localizedCaseInsensitiveContains(searchText) ||
-                $0.city.localizedCaseInsensitiveContains(searchText)
-            }
-        }
-
         return SuperchargerFilter.apply(
-            inViewport,
+            sites,
             criteria: filterCriteria,
             sortBy: sortOrder,
             userLocation: locationService.currentLocation
@@ -52,7 +44,7 @@ public struct ListView: View {
     public var body: some View {
         NavigationStack {
             Group {
-                if allSites.isEmpty {
+                if sites.isEmpty {
                     ProgressView("Loading superchargers…")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else if displayedSites.isEmpty {
@@ -100,7 +92,23 @@ public struct ListView: View {
                 SuperchargerDetailView(supercharger: site, locationService: locationService)
             }
         }
-        .background(Color.darkBackground.ignoresSafeArea())
+        .task(id: visibleRegion.center.latitude) { await loadSites() }
+        .task(id: visibleRegion.center.longitude) { await loadSites() }
+    }
+
+    private func loadSites() async {
+        let latMin = visibleRegion.center.latitude  - visibleRegion.span.latitudeDelta  / 2
+        let latMax = visibleRegion.center.latitude  + visibleRegion.span.latitudeDelta  / 2
+        let lngMin = visibleRegion.center.longitude - visibleRegion.span.longitudeDelta / 2
+        let lngMax = visibleRegion.center.longitude + visibleRegion.span.longitudeDelta / 2
+
+        let descriptor = FetchDescriptor<Supercharger>(
+            predicate: #Predicate<Supercharger> { sc in
+                sc.latitude  >= latMin && sc.latitude  <= latMax &&
+                sc.longitude >= lngMin && sc.longitude <= lngMax
+            }
+        )
+        sites = (try? modelContext.fetch(descriptor)) ?? []
     }
 
     private var filterButton: some View {

@@ -12,8 +12,6 @@ public struct MapView: View {
     @State private var navigationPath: [Supercharger] = []
     @State private var showDetailSheet: Bool = false
     @State private var selectedID: String?
-    @State private var rangeRingCalculator = RangeRingCalculator()
-    @State private var showRangeRing: Bool = false
 
     @Environment(LiveAvailabilityStore.self) private var liveStore
     @Environment(\.teslaIsAuthenticated) private var isAuthenticated
@@ -132,9 +130,6 @@ public struct MapView: View {
                 }
             }
             UserAnnotation()
-            if showRangeRing {
-                RangeRingOverlay(calculator: rangeRingCalculator)
-            }
         }
         .mapStyle(.standard)
         .mapControls { }
@@ -221,38 +216,6 @@ public struct MapView: View {
                 .padding(.horizontal, 4)
             }
         }
-    }
-
-    // MARK: - Range ring button
-
-    private var rangeRingButton: some View {
-        Button {
-            showRangeRing.toggle()
-            if showRangeRing, let loc = locationService.currentLocation {
-                Task {
-                    await rangeRingCalculator.calculate(
-                        centre: loc,
-                        vehicle: nil,
-                        currentSoc: 80,
-                        allSuperchargers: viewModel.annotations.map(\.supercharger)
-                    )
-                }
-            } else {
-                rangeRingCalculator.clear()
-            }
-        } label: {
-            Image(systemName: "waveform.path.ecg")
-                .symbolVariant(showRangeRing ? .fill : .none)
-                .font(.system(size: 18, weight: .semibold))
-                .padding(12)
-                .background(.thinMaterial, in: Circle())
-                .shadow(radius: 4, y: 2)
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel("Range ring")
-        .accessibilityHint(showRangeRing ? "Tap to hide the range ring" : "Tap to show the range ring")
-        .accessibilityValue(showRangeRing ? "Range ring on" : "Range ring off")
-        .accessibilityAddTraits(.isButton)
     }
 
     // MARK: - Recenter button
