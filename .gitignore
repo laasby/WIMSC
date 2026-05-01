@@ -2,6 +2,7 @@
 *.xcworkspace/xcuserdata/
 *.xcuserstate
 *.xcscheme
+!xcshareddata/xcschemes/*.xcscheme
 DerivedData/
 build/
 *.pbxuser

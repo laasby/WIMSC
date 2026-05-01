@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.app
+
+      - name: Build
+        run: |
+          xcodebuild \
+            -project WIMSC.xcodeproj \
+            -scheme WIMSC \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -configuration Debug \
+            build | xcpretty || cat /tmp/xcodebuild.log
+
+      - name: Test packages
+        run: |
+          cd Packages/SCTests
+          swift test
