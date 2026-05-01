@@ -30,9 +30,6 @@ struct ContentView: View {
             )
                 .tabItem { Label("List", systemImage: "list.bullet") }
 
-            TripPlannerView()
-                .tabItem { Label("Trip", systemImage: "map.fill") }
-
             SettingsView()
                 .tabItem { Label("Settings", systemImage: "gear") }
         }
