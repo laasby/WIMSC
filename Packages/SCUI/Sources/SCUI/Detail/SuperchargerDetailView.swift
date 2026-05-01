@@ -27,6 +27,9 @@ public struct SuperchargerDetailView: View {
                 pricingSection
                 amenitiesSection
                 weatherSection
+                if supercharger.country == "NO" {
+                    nordicSection
+                }
                 communitySection
                 footer
             }
@@ -403,6 +406,24 @@ public struct SuperchargerDetailView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter.string(from: date)
+    }
+
+    // MARK: - Nordic section
+
+    @ViewBuilder
+    private var nordicSection: some View {
+        DetailSection(title: "Mountain Passes") {
+            Text("Loading...")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .padding(.vertical, 6)
+        }
+        DetailSection(title: "Electricity Prices") {
+            Text("Spot price data available for Norwegian sites.")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .padding(.vertical, 6)
+        }
     }
 
     // MARK: - Community section
