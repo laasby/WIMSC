@@ -34,16 +34,16 @@ struct WIMSCApp: App {
                 .environment(cloudSyncManager)
                 .environment(liveAvailabilityStore)
                 .environment(\.teslaIsAuthenticated, teslaAuthService.isAuthenticated)
-                .environment(\.teslaSignIn) {
+                .environment(\.teslaSignIn) { @MainActor in
                     await teslaAuthService.signIn()
-                    if teslaAuthService.isAuthenticated {
+                    if await teslaAuthService.isAuthenticated {
                         liveAvailabilityStore.tokenProvider = { [weak teslaAuthService] in
                             guard let svc = teslaAuthService else { throw TeslaAuthError.notAuthenticated }
                             return try await svc.refreshIfNeeded()
                         }
                     }
                 }
-                .environment(\.teslaSignOut) {
+                .environment(\.teslaSignOut) { @MainActor in
                     teslaAuthService.signOut()
                     liveAvailabilityStore.tokenProvider = nil
                     liveAvailabilityStore.availability = [:]

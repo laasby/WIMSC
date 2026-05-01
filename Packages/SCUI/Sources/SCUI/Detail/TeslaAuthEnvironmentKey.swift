@@ -9,13 +9,13 @@ private struct TeslaIsAuthenticatedKey: EnvironmentKey {
 // MARK: - signIn
 
 private struct TeslaSignInKey: EnvironmentKey {
-    static let defaultValue: @Sendable () async -> Void = {}
+    static let defaultValue: @MainActor @Sendable () async -> Void = {}
 }
 
 // MARK: - signOut
 
 private struct TeslaSignOutKey: EnvironmentKey {
-    static let defaultValue: @Sendable () -> Void = {}
+    static let defaultValue: @MainActor @Sendable () -> Void = {}
 }
 
 public extension EnvironmentValues {
