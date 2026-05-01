@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "SCTests",
-    platforms: [.iOS(.v17)],
+    platforms: [.iOS(.v17), .macOS(.v14)],
     dependencies: [
         .package(path: "../SCDomain"),
     ],
