@@ -2,12 +2,17 @@ import SwiftUI
 import MapKit
 import UIKit
 import SCData
+import SCDomain
+import SCDomain
 
 public struct SuperchargerDetailView: View {
     public let supercharger: Supercharger
     public let locationService: LocationService
     @State private var viewModel: DetailViewModel
     @State private var showNavigateSheet = false
+    @State private var preconditioningAdvice: PreconditioningAdvice? = nil
+    @State private var availability: StallAvailability? = nil
+    @State private var waitDescription: String = ""
 
     public init(supercharger: Supercharger, locationService: LocationService) {
         self.supercharger = supercharger
@@ -22,11 +27,13 @@ public struct SuperchargerDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 headerCard
+                availabilitySection
                 miniMap
                 specsSection
                 pricingSection
                 amenitiesSection
                 weatherSection
+                preconditioningSection
                 if supercharger.country == "NO" {
                     nordicSection
                 }
@@ -38,7 +45,27 @@ public struct SuperchargerDetailView: View {
         .navigationTitle(supercharger.name)
         .navigationBarTitleDisplayMode(.large)
         .toolbar { navigationButtons }
-        .task { await viewModel.load() }
+        .task {
+            await viewModel.load()
+            if let temp = viewModel.weather?.temperatureCelsius,
+               let dist = viewModel.distanceMetres {
+                preconditioningAdvice = PreconditioningAdvisor.advise(
+                    destination: supercharger,
+                    ambientCelsius: temp,
+                    vehicle: nil,
+                    distanceToChargerKm: dist / 1000
+                )
+            }
+        }
+        .task {
+            let client = AvailabilityClient()
+            availability = await client.fetchAvailability(siteId: supercharger.id, stallCount: supercharger.stallCount)
+            waitDescription = WaitTimePredictor.waitDescription(
+                availability: availability,
+                stallCount: supercharger.stallCount,
+                visitHistory: []
+            )
+        }
         .confirmationDialog(
             "Navigate to \(supercharger.name)",
             isPresented: $showNavigateSheet,
@@ -181,6 +208,18 @@ public struct SuperchargerDetailView: View {
     private func openInGoogleMaps() {
         guard let url = URL(string: "comgooglemaps://?daddr=\(supercharger.latitude),\(supercharger.longitude)&directionsmode=driving") else { return }
         UIApplication.shared.open(url)
+    }
+
+    // MARK: - Availability section
+
+    private var availabilitySection: some View {
+        DetailSection(title: "Availability") {
+            AvailabilityView(
+                availability: availability,
+                stallCount: supercharger.stallCount,
+                waitDescription: waitDescription
+            )
+        }
     }
 
     // MARK: - Mini map
@@ -327,6 +366,18 @@ public struct SuperchargerDetailView: View {
         case .coveredParking: return "car.fill"
         case .pullThrough:    return "arrow.right.to.line"
         case .lounge:         return "sofa"
+        }
+    }
+
+    // MARK: - Preconditioning section
+
+    private var preconditioningSection: some View {
+        Group {
+            if let advice = preconditioningAdvice {
+                DetailSection(title: "Preconditioning") {
+                    PreconditioningBannerView(advice: advice)
+                }
+            }
         }
     }
 
