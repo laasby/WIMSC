@@ -13,6 +13,8 @@ public struct MapView: View {
     @State private var navigationPath: [Supercharger] = []
     @State private var showDetailSheet: Bool = false
     @State private var selectedID: String?
+    @State private var rangeRingCalculator = RangeRingCalculator()
+    @State private var showRangeRing: Bool = false
 
     private let locationService: LocationService
 
@@ -97,6 +99,9 @@ public struct MapView: View {
                 .tag(ann.supercharger.id)
             }
             UserAnnotation()
+            if showRangeRing {
+                RangeRingOverlay(calculator: rangeRingCalculator)
+            }
         }
         .mapStyle(.standard)
         .onMapCameraChange(frequency: .onEnd) { context in
@@ -134,12 +139,15 @@ public struct MapView: View {
 
             Spacer()
 
-            // Bottom bar: filter chips + recenter button
+            // Bottom bar: filter chips + recenter + range ring buttons
             HStack(alignment: .bottom, spacing: 12) {
                 filterChipsRow
 
-                recenterButton
-                    .padding(.bottom, 4)
+                VStack(spacing: 8) {
+                    rangeRingButton
+                    recenterButton
+                }
+                .padding(.bottom, 4)
             }
             .padding(.horizontal, 16)
             .padding(.bottom, 96) // above tab bar
@@ -192,6 +200,34 @@ public struct MapView: View {
                 .padding(.horizontal, 4)
             }
         }
+    }
+
+    // MARK: - Range ring button
+
+    private var rangeRingButton: some View {
+        Button {
+            showRangeRing.toggle()
+            if showRangeRing, let loc = locationService.currentLocation {
+                Task {
+                    await rangeRingCalculator.calculate(
+                        centre: loc,
+                        vehicle: nil,
+                        currentSoc: 80,
+                        allSuperchargers: viewModel.annotations.map(\.supercharger)
+                    )
+                }
+            } else {
+                rangeRingCalculator.clear()
+            }
+        } label: {
+            Image(systemName: "waveform.path.ecg")
+                .symbolVariant(showRangeRing ? .fill : .none)
+                .font(.system(size: 18, weight: .semibold))
+                .padding(12)
+                .background(.thinMaterial, in: Circle())
+                .shadow(radius: 4, y: 2)
+        }
+        .buttonStyle(.plain)
     }
 
     // MARK: - Recenter button
