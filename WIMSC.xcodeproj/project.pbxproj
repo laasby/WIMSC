@@ -23,6 +23,7 @@
 		4A000000000000000000A015 /* ActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A000000000000000000A007 /* ActivityKit.framework */; };
 		4A000000000000000000A016 /* WIMSCWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4A000000000000000000A001 /* WIMSCWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4A00000000000000000000B4 /* WIMSCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A00000000000000000000B2 /* WIMSCUITests.swift */; };
+		4A150000000000000000B002 /* FindNearestSuperchargerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A150000000000000000B001 /* FindNearestSuperchargerIntent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		4A00000000000000000000B0 /* WIMSCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WIMSCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A00000000000000000000B2 /* WIMSCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WIMSCUITests.swift; sourceTree = "<group>"; };
 		4A00000000000000000000B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A150000000000000000B001 /* FindNearestSuperchargerIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindNearestSuperchargerIntent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,8 +129,17 @@
 				4A0000000000000000000024 /* PrivacyInfo.xcprivacy */,
 				4A0000000000000000000026 /* Localizable.xcstrings */,
 				4A0000000000000000000027 /* InfoPlist.xcstrings */,
+				4A150000000000000000B003 /* Intents */,
 			);
 			path = WIMSC;
+			sourceTree = "<group>";
+		};
+		4A150000000000000000B003 /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				4A150000000000000000B001 /* FindNearestSuperchargerIntent.swift */,
+			);
+			path = Intents;
 			sourceTree = "<group>";
 		};
 		4A0000000000000000000004 /* Products */ = {
@@ -320,6 +331,7 @@
 			files = (
 				4A0000000000000000000030 /* WIMSCApp.swift in Sources */,
 				4A0000000000000000000031 /* ContentView.swift in Sources */,
+				4A150000000000000000B002 /* FindNearestSuperchargerIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

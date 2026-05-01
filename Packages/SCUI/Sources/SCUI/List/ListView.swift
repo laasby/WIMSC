@@ -65,6 +65,7 @@ public struct ListView: View {
                 SuperchargerDetailView(supercharger: site, locationService: viewModel.locationService)
             }
         }
+        .background(Color.darkBackground.ignoresSafeArea())
     }
 
     private var filterButton: some View {

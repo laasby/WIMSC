@@ -35,17 +35,20 @@ public struct SuperchargerRow: View {
                 .frame(width: 4)
                 .cornerRadius(2)
                 .frame(maxHeight: .infinity)
+                .accessibilityLabel("\(supercharger.generation.rawValue.uppercased()) charger")
 
             // Main content
             VStack(alignment: .leading, spacing: 3) {
                 Text(supercharger.name)
                     .font(.headline)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
 
                 Text(locationLine)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
 
                 HStack(spacing: 6) {
                     Text("\(supercharger.stallCount) stalls · \(supercharger.maxKilowatts) kW")
@@ -54,11 +57,12 @@ public struct SuperchargerRow: View {
 
                     if supercharger.hasMagicDock {
                         Text("MD")
-                            .font(.system(size: 9, weight: .bold))
+                            .font(.caption2.weight(.bold))
                             .foregroundStyle(.white)
                             .padding(.horizontal, 5)
                             .padding(.vertical, 2)
                             .background(Color.teal, in: Capsule())
+                            .accessibilityLabel("Magic Dock")
                     }
                 }
             }
@@ -69,8 +73,19 @@ public struct SuperchargerRow: View {
             Circle()
                 .fill(supercharger.status.dotColor)
                 .frame(width: 12, height: 12)
+                .accessibilityLabel("Status: \(supercharger.status.displayName)")
         }
         .padding(.vertical, 6)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(rowAccessibilityLabel)
+    }
+
+    private var rowAccessibilityLabel: String {
+        var parts = [supercharger.name, locationLine]
+        parts.append("\(supercharger.stallCount) stalls, \(supercharger.maxKilowatts) kilowatts")
+        parts.append("Status: \(supercharger.status.displayName)")
+        if supercharger.hasMagicDock { parts.append("Magic Dock available") }
+        return parts.joined(separator: ". ")
     }
 
     private var locationLine: String {

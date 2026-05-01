@@ -21,6 +21,7 @@ public struct DetailRow: View {
                 .font(.subheadline)
                 .foregroundStyle(valueColor)
                 .multilineTextAlignment(.trailing)
+                .minimumScaleFactor(0.7)
         }
         .padding(.vertical, 6)
         Divider()

@@ -228,6 +228,10 @@ public struct MapView: View {
                 .shadow(radius: 4, y: 2)
         }
         .buttonStyle(.plain)
+        .accessibilityLabel("Range ring")
+        .accessibilityHint(showRangeRing ? "Tap to hide the range ring" : "Tap to show the range ring")
+        .accessibilityValue(showRangeRing ? "Range ring on" : "Range ring off")
+        .accessibilityAddTraits(.isButton)
     }
 
     // MARK: - Recenter button
@@ -243,6 +247,9 @@ public struct MapView: View {
                 .shadow(radius: 4, y: 2)
         }
         .buttonStyle(.plain)
+        .accessibilityLabel("Re-center map on my location")
+        .accessibilityHint("Moves the map to your current position")
+        .accessibilityAddTraits(.isButton)
     }
 
     // MARK: - Helpers

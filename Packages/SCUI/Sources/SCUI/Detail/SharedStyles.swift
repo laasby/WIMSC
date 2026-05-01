@@ -1,6 +1,17 @@
 import SwiftUI
 import SCData
 
+// MARK: - OLED-aware background color
+
+extension Color {
+    /// True black in dark mode for OLED displays, white in light mode.
+    static var darkBackground: Color {
+        Color(uiColor: UIColor { tc in
+            tc.userInterfaceStyle == .dark ? .black : .systemBackground
+        })
+    }
+}
+
 // MARK: - SiteStatus helpers (internal — shared across Map and Detail)
 
 extension SiteStatus {
@@ -44,22 +55,24 @@ struct GenerationBadge: View {
 
     var body: some View {
         Text(GenerationPinStyle.label(for: generation))
-            .font(.system(size: 10, weight: .bold))
+            .font(.caption2.weight(.bold))
             .foregroundStyle(.white)
             .padding(.horizontal, 6)
             .padding(.vertical, 3)
             .background(GenerationPinStyle.color(for: generation), in: RoundedRectangle(cornerRadius: 4))
+            .accessibilityLabel("\(GenerationPinStyle.label(for: generation)) generation charger")
     }
 }
 
 struct MagicDockBadge: View {
     var body: some View {
         Text("MD")
-            .font(.system(size: 10, weight: .bold))
+            .font(.caption2.weight(.bold))
             .foregroundStyle(.white)
             .padding(.horizontal, 6)
             .padding(.vertical, 3)
             .background(Color.teal, in: RoundedRectangle(cornerRadius: 4))
+            .accessibilityLabel("Magic Dock")
     }
 }
 
@@ -71,9 +84,12 @@ struct StatusDot: View {
             Circle()
                 .fill(status.dotColor)
                 .frame(width: 8, height: 8)
+                .accessibilityHidden(true)
             Text(status.displayName)
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Status: \(status.displayName)")
     }
 }

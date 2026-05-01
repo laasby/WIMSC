@@ -1,8 +1,8 @@
 import SwiftUI
 import MapKit
 import UIKit
+import UniformTypeIdentifiers
 import SCData
-import SCDomain
 import SCDomain
 
 public struct SuperchargerDetailView: View {
@@ -43,7 +43,7 @@ public struct SuperchargerDetailView: View {
                 footer
             }
         }
-        .background(Color(uiColor: .systemBackground))
+        .background(Color.darkBackground)
         .navigationTitle(supercharger.name)
         .navigationBarTitleDisplayMode(.large)
         .toolbar { navigationButtons }
@@ -101,6 +101,9 @@ public struct SuperchargerDetailView: View {
                     .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Coordinates: \(String(format: "%.5f", supercharger.latitude)), \(String(format: "%.5f", supercharger.longitude))")
+            .accessibilityHint("Tap to copy coordinates to clipboard")
+            .accessibilityAddTraits(.isButton)
 
             HStack(spacing: 8) {
                 GenerationBadge(generation: supercharger.generation)
@@ -545,12 +548,52 @@ public struct SuperchargerDetailView: View {
     @ToolbarContentBuilder
     private var navigationButtons: some ToolbarContent {
         ToolbarItemGroup(placement: .topBarTrailing) {
+            Menu {
+                ShareLink("Share Apple Maps Link", item: mapsDirectionsURL)
+                ShareLink(
+                    "Export GPX File",
+                    item: ShareableGPX(
+                        gpxString: GPXExporter.gpx(for: supercharger),
+                        filename: "\(supercharger.name).gpx"
+                    ),
+                    preview: SharePreview(supercharger.name, image: Image(systemName: "location.fill"))
+                )
+            } label: {
+                Image(systemName: "square.and.arrow.up")
+                    .accessibilityLabel("Share")
+                    .accessibilityHint("Export Apple Maps link or GPX file")
+            }
+
             Button {
                 supercharger.isFavourite.toggle()
             } label: {
                 Image(systemName: supercharger.isFavourite ? "heart.fill" : "heart")
                     .foregroundStyle(supercharger.isFavourite ? Color.red : Color.secondary)
             }
+            .accessibilityLabel(supercharger.isFavourite ? "Remove from favourites" : "Add to favourites")
+            .accessibilityHint("Toggles this site as a favourite")
+            .accessibilityAddTraits(.isButton)
         }
+    }
+
+    private var mapsDirectionsURL: URL {
+        URL(string: "maps.apple.com/?daddr=\(supercharger.latitude),\(supercharger.longitude)&dirflg=d")
+            ?? URL(string: "https://maps.apple.com/")!
+    }
+}
+
+// MARK: - GPX file transferable
+
+private struct ShareableGPX: Transferable {
+    let gpxString: String
+    let filename: String
+
+    static var transferRepresentation: some TransferRepresentation {
+        DataRepresentation(
+            exportedContentType: .init(importedAs: "com.topografix.gpx", conformingTo: .xml)
+        ) { item in
+            Data(item.gpxString.utf8)
+        }
+        .suggestedFileName { $0.filename }
     }
 }
