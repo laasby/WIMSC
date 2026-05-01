@@ -27,7 +27,6 @@ public final class MapViewModel {
     public var annotations: [SuperchargerAnnotation] = []
     public var clusterItems: [MapClusterItem] = []
     public var selectedSupercharger: Supercharger?
-    public var isSearchingThisArea: Bool = false
     public var filterCriteria: FilterCriteria = .default
 
     // MARK: Dependencies
@@ -68,7 +67,6 @@ public final class MapViewModel {
             )
             annotations = filtered.map { SuperchargerAnnotation(supercharger: $0) }
             clusterItems = MapClusterer.cluster(sites: filtered, region: region)
-            isSearchingThisArea = false
         } catch {
             // Non-fatal: leave existing annotations in place
         }
@@ -81,11 +79,6 @@ public final class MapViewModel {
             center: loc.coordinate,
             span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
         )
-    }
-
-    /// Reload annotations for the given region (user tapped "Search this area").
-    public func searchThisArea(region: MKCoordinateRegion) async {
-        await loadAnnotations(in: region)
     }
 
     /// Set the selected supercharger.

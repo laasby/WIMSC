@@ -9,7 +9,6 @@ public struct MapView: View {
     @State private var viewModel: MapViewModel
     @State private var mapCameraPosition: MapCameraPosition
     @State private var currentRegion: MKCoordinateRegion = MapView.defaultRegion
-    @State private var lastSearchedRegion: MKCoordinateRegion = MapView.defaultRegion
     @State private var navigationPath: [Supercharger] = []
     @State private var showDetailSheet: Bool = false
     @State private var selectedID: String?
@@ -86,7 +85,6 @@ public struct MapView: View {
                 locationService.requestAuthorisation()
                 locationService.startUpdating()
                 await viewModel.loadAnnotations(in: currentRegion)
-                lastSearchedRegion = currentRegion
             }
             .onAppear {
                 Task { await viewModel.loadAnnotations(in: currentRegion) }
@@ -142,9 +140,8 @@ public struct MapView: View {
         .onMapCameraChange(frequency: .onEnd) { context in
             currentRegion = context.region
             regionBinding?.wrappedValue = context.region
-            if hasMoved(from: lastSearchedRegion, to: context.region) {
-                viewModel.isSearchingThisArea = true
-            }
+            let region = context.region
+            Task { await viewModel.loadAnnotations(in: region) }
             if isAuthenticated {
                 let center = context.region.center
                 let allSites = viewModel.annotations.map { $0.supercharger }
@@ -164,26 +161,6 @@ public struct MapView: View {
 
     private var overlayLayer: some View {
         VStack(spacing: 0) {
-            // "Search this area" pill — top center
-            if viewModel.isSearchingThisArea {
-                Button {
-                    let region = currentRegion
-                    Task {
-                        await viewModel.searchThisArea(region: region)
-                        lastSearchedRegion = region
-                    }
-                } label: {
-                    Label("Search this area", systemImage: "arrow.counterclockwise")
-                        .font(.subheadline.weight(.semibold))
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 10)
-                }
-                .buttonStyle(.borderedProminent)
-                .padding(.top, 56)
-                .transition(.move(edge: .top).combined(with: .opacity))
-                .animation(.spring(), value: viewModel.isSearchingThisArea)
-            }
-
             Spacer()
 
             // Bottom bar: filter chips + recenter + range ring buttons
@@ -299,12 +276,5 @@ public struct MapView: View {
         .accessibilityAddTraits(.isButton)
     }
 
-    // MARK: - Helpers
-
-    private func hasMoved(from old: MKCoordinateRegion, to new: MKCoordinateRegion) -> Bool {
-        let latDiff = abs(old.center.latitude - new.center.latitude)
-        let lngDiff = abs(old.center.longitude - new.center.longitude)
-        let threshold = min(old.span.latitudeDelta, new.span.latitudeDelta) * 0.3
-        return latDiff > threshold || lngDiff > threshold
-    }
 }
+
