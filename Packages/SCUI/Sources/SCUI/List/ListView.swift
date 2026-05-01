@@ -62,8 +62,7 @@ public struct ListView: View {
                 await viewModel.reload()
             }
             .navigationDestination(for: Supercharger.self) { site in
-                Text("Detail for \(site.name) — coming in M4")
-                    .navigationTitle(site.name)
+                SuperchargerDetailView(supercharger: site, locationService: viewModel.locationService)
             }
         }
     }

@@ -16,20 +16,6 @@ private extension ChargerGeneration {
     }
 }
 
-// MARK: - Status color
-
-private extension SiteStatus {
-    var dotColor: Color {
-        switch self {
-        case .open:         return .blue
-        case .construction: return .orange
-        case .closed:       return Color(white: 0.5)
-        case .permit:       return .yellow
-        case .plan:         return Color(white: 0.7)
-        }
-    }
-}
-
 // MARK: - Row
 
 public struct SuperchargerRow: View {

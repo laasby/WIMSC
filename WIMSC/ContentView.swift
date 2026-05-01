@@ -12,7 +12,7 @@ struct ContentView: View {
             MapView(locationService: locationService, modelContext: modelContext)
                 .tabItem { Label("Map", systemImage: "map") }
 
-            Text("List — coming in M3")
+            ListView(locationService: locationService, modelContext: modelContext)
                 .tabItem { Label("List", systemImage: "list.bullet") }
         }
     }

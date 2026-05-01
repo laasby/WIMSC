@@ -10,6 +10,7 @@ public struct MapView: View {
     @State private var mapCameraPosition: MapCameraPosition
     @State private var currentRegion: MKCoordinateRegion = MapView.defaultRegion
     @State private var lastSearchedRegion: MKCoordinateRegion = MapView.defaultRegion
+    @State private var navigationPath: [Supercharger] = []
     @State private var showDetailSheet: Bool = false
     @State private var selectedID: String?
 
@@ -30,47 +31,55 @@ public struct MapView: View {
     }
 
     public var body: some View {
-        ZStack {
-            mapLayer
-            overlayLayer
-        }
-        // Sync programmatic region changes (e.g. recenter) to camera
-        .onChange(of: viewModel.region) { _, newRegion in
-            withAnimation { mapCameraPosition = .region(newRegion) }
-        }
-        // Handle annotation selection
-        .onChange(of: selectedID) { _, newID in
-            if let id = newID,
-               let ann = viewModel.annotations.first(where: { $0.supercharger.id == id }) {
-                viewModel.select(ann.supercharger)
-                showDetailSheet = true
+        NavigationStack(path: $navigationPath) {
+            ZStack {
+                mapLayer
+                overlayLayer
             }
-        }
-        .sheet(isPresented: $showDetailSheet, onDismiss: {
-            selectedID = nil
-            viewModel.clearSelection()
-        }) {
-            if let sc = viewModel.selectedSupercharger {
-                SuperchargerCalloutView(
-                    supercharger: sc,
-                    userLocation: locationService.currentLocation,
-                    onNavigate: { showDetailSheet = false },
-                    onDismiss: {
-                        showDetailSheet = false
-                        selectedID = nil
-                        viewModel.clearSelection()
-                    }
-                )
-                .presentationDetents([.medium])
-                .presentationDragIndicator(.visible)
-                .presentationBackground(.background)
+            .navigationDestination(for: Supercharger.self) { site in
+                SuperchargerDetailView(supercharger: site, locationService: locationService)
             }
-        }
-        .task {
-            locationService.requestAuthorisation()
-            locationService.startUpdating()
-            await viewModel.loadAnnotations(in: currentRegion)
-            lastSearchedRegion = currentRegion
+            // Sync programmatic region changes (e.g. recenter) to camera
+            .onChange(of: viewModel.region) { _, newRegion in
+                withAnimation { mapCameraPosition = .region(newRegion) }
+            }
+            // Handle annotation selection
+            .onChange(of: selectedID) { _, newID in
+                if let id = newID,
+                   let ann = viewModel.annotations.first(where: { $0.supercharger.id == id }) {
+                    viewModel.select(ann.supercharger)
+                    showDetailSheet = true
+                }
+            }
+            .sheet(isPresented: $showDetailSheet, onDismiss: {
+                selectedID = nil
+                viewModel.clearSelection()
+            }) {
+                if let sc = viewModel.selectedSupercharger {
+                    SuperchargerCalloutView(
+                        supercharger: sc,
+                        userLocation: locationService.currentLocation,
+                        onNavigate: {
+                            navigationPath.append(sc)
+                            showDetailSheet = false
+                        },
+                        onDismiss: {
+                            showDetailSheet = false
+                            selectedID = nil
+                            viewModel.clearSelection()
+                        }
+                    )
+                    .presentationDetents([.medium])
+                    .presentationDragIndicator(.visible)
+                    .presentationBackground(.background)
+                }
+            }
+            .task {
+                locationService.requestAuthorisation()
+                locationService.startUpdating()
+                await viewModel.loadAnnotations(in: currentRegion)
+                lastSearchedRegion = currentRegion
+            }
         }
     }
 
