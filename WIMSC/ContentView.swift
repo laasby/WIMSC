@@ -15,6 +15,9 @@ struct ContentView: View {
             ListView(locationService: locationService, modelContext: modelContext)
                 .tabItem { Label("List", systemImage: "list.bullet") }
 
+            TripPlannerView()
+                .tabItem { Label("Trip", systemImage: "map.fill") }
+
             SettingsView()
                 .tabItem { Label("Settings", systemImage: "gear") }
         }
