@@ -13,11 +13,11 @@ public enum SortOrder: String, CaseIterable, Identifiable {
     /// A user-facing localised label for this sort order.
     public var localizedName: String {
         switch self {
-        case .distance: return NSLocalizedString("Distance", comment: "Sort by distance from user")
-        case .name: return NSLocalizedString("Name", comment: "Sort alphabetically by name")
-        case .stallCount: return NSLocalizedString("Stall Count", comment: "Sort by number of stalls")
-        case .maxKilowatts: return NSLocalizedString("Max Power", comment: "Sort by maximum kilowatts")
-        case .recentlyVerified: return NSLocalizedString("Recently Verified", comment: "Sort by last verified date")
+        case .distance:         return L10n.string("sort.distance")
+        case .name:             return L10n.string("sort.name")
+        case .stallCount:       return L10n.string("sort.stallCount")
+        case .maxKilowatts:     return L10n.string("sort.maxKilowatts")
+        case .recentlyVerified: return L10n.string("sort.recentlyVerified")
         }
     }
 }

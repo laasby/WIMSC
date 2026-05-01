@@ -1,0 +1,404 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "tab.map" : {
+      "comment" : "Tab bar: map view",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Map" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Kart" } }
+      }
+    },
+    "tab.list" : {
+      "comment" : "Tab bar: list view",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "List" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Liste" } }
+      }
+    },
+    "map.searchThisArea" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search this area" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Søk i dette området" } }
+      }
+    },
+    "map.recenter" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Recenter" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Sentrer" } }
+      }
+    },
+    "list.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Superchargers" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Superladere" } }
+      }
+    },
+    "list.search.prompt" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search by name or city" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Søk etter navn eller by" } }
+      }
+    },
+    "list.empty.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No Superchargers" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Ingen superladere" } }
+      }
+    },
+    "list.empty.description" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Try adjusting your filters or search." } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Prøv å justere filtrene eller søket." } }
+      }
+    },
+    "filter.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Filters" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Filtre" } }
+      }
+    },
+    "filter.done" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Done" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Ferdig" } }
+      }
+    },
+    "filter.reset" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reset to defaults" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Tilbakestill" } }
+      }
+    },
+    "filter.section.generation" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Generation" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Generasjon" } }
+      }
+    },
+    "filter.section.power" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Minimum Power" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Minimum effekt" } }
+      }
+    },
+    "filter.section.status" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Status" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Status" } }
+      }
+    },
+    "filter.section.plugTypes" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Plug Types" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Kontakttyper" } }
+      }
+    },
+    "filter.section.amenities" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Amenities" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Fasiliteter" } }
+      }
+    },
+    "filter.section.favourites" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Favourites" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Favoritter" } }
+      }
+    },
+    "filter.favouritesOnly" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Favourites only" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Kun favoritter" } }
+      }
+    },
+    "sort.distance" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Distance" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Avstand" } }
+      }
+    },
+    "sort.name" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Name" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Navn" } }
+      }
+    },
+    "sort.stallCount" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Stall Count" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Antall ladestasjoner" } }
+      }
+    },
+    "sort.maxKilowatts" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Max Power" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Maks effekt" } }
+      }
+    },
+    "sort.recentlyVerified" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Recently Verified" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Nylig verifisert" } }
+      }
+    },
+    "detail.navigate" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Navigate" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Naviger" } }
+      }
+    },
+    "detail.share" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Share" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Del" } }
+      }
+    },
+    "detail.section.specs" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Specifications" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Spesifikasjoner" } }
+      }
+    },
+    "detail.section.pricing" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Pricing" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Prising" } }
+      }
+    },
+    "detail.section.amenities" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Amenities" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Fasiliteter" } }
+      }
+    },
+    "detail.section.weather" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Weather" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Vær" } }
+      }
+    },
+    "detail.section.reports" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Recent Reports" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Nylige rapporter" } }
+      }
+    },
+    "detail.coldSoak.warning" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Battery may be cold-soaked. Expect reduced charging speed until the pack warms up." } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Batteriet kan være nedkjølt. Forvent redusert ladehastighet til pakken varmes opp." } }
+      }
+    },
+    "detail.noReports" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No recent community reports." } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Ingen nylige rapporter fra brukere." } }
+      }
+    },
+    "detail.noPricing" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Pricing info not available" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Prisinformasjon ikke tilgjengelig" } }
+      }
+    },
+    "detail.noAmenities" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No amenity data" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Ingen fasilitetdata" } }
+      }
+    },
+    "status.open" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Open" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Åpen" } }
+      }
+    },
+    "status.construction" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Construction" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Under bygging" } }
+      }
+    },
+    "status.closed" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Closed" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Stengt" } }
+      }
+    },
+    "status.permit" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Permit" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Tillatelse" } }
+      }
+    },
+    "status.plan" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Planned" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Planlagt" } }
+      }
+    },
+    "generation.v2" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "V2 (150 kW)" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "V2 (150 kW)" } }
+      }
+    },
+    "generation.v3" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "V3 (250 kW)" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "V3 (250 kW)" } }
+      }
+    },
+    "generation.v4" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "V4 (325 kW)" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "V4 (325 kW)" } }
+      }
+    },
+    "generation.unknown" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unknown" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Ukjent" } }
+      }
+    },
+    "amenity.restrooms" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Restrooms" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Toaletter" } }
+      }
+    },
+    "amenity.food" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Food" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Mat" } }
+      }
+    },
+    "amenity.coffee" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Coffee" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Kaffe" } }
+      }
+    },
+    "amenity.wifi" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Wi-Fi" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Wi-Fi" } }
+      }
+    },
+    "amenity.shops" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Shops" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Butikker" } }
+      }
+    },
+    "amenity.coveredParking" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Covered Parking" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Overbygget parkering" } }
+      }
+    },
+    "amenity.pullThrough" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Pull-through Stalls" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Gjennomkjøring" } }
+      }
+    },
+    "amenity.lounge" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lounge" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Lounge" } }
+      }
+    },
+    "plug.nacs" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "NACS (Tesla)" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "NACS (Tesla)" } }
+      }
+    },
+    "plug.ccs2" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "CCS2" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "CCS2" } }
+      }
+    },
+    "plug.type2" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Type 2" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Type 2" } }
+      }
+    },
+    "plug.chademo" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "CHAdeMO" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "CHAdeMO" } }
+      }
+    },
+    "settings.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Settings" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Innstillinger" } }
+      }
+    },
+    "settings.yourData" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your Data" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Dine data" } }
+      }
+    },
+    "settings.credits" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Credits" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Henvisninger" } }
+      }
+    },
+    "credits.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Data Sources" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Datakilder" } }
+      }
+    },
+    "nordic.passStatus.open" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Pass open" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Fjellovergangen er åpen" } }
+      }
+    },
+    "nordic.passStatus.closed" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Pass closed" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Fjellovergangen er stengt" } }
+      }
+    },
+    "nordic.passStatus.restricted" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Restrictions apply" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Restriksjoner gjelder" } }
+      }
+    },
+    "nordic.spotPrice.label" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Spot price (NO)" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Spotpris (NO)" } }
+      }
+    },
+    "nordic.arbitrage.supercharge" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Supercharging is cheaper right now" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Superlading er billigere nå" } }
+      }
+    },
+    "nordic.arbitrage.home" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Charge at home tonight — it's cheaper" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Lad hjemme i natt — det er billigere" } }
+      }
+    },
+    "date.unknown" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unknown" } },
+        "nb" : { "stringUnit" : { "state" : "translated", "value" : "Ukjent" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

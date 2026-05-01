@@ -11,6 +11,8 @@
 		4A0000000000000000000031 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0000000000000000000021 /* ContentView.swift */; };
 		4A0000000000000000000032 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A0000000000000000000022 /* Assets.xcassets */; };
 		4A0000000000000000000033 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4A0000000000000000000024 /* PrivacyInfo.xcprivacy */; };
+		4A0000000000000000000037 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4A0000000000000000000026 /* Localizable.xcstrings */; };
+		4A0000000000000000000038 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4A0000000000000000000027 /* InfoPlist.xcstrings */; };
 		4A0000000000000000000034 /* SCData in Frameworks */ = {isa = PBXBuildFile; productRef = 4A0000000000000000000060 /* SCData */; };
 		4A0000000000000000000035 /* SCDomain in Frameworks */ = {isa = PBXBuildFile; productRef = 4A0000000000000000000061 /* SCDomain */; };
 		4A0000000000000000000036 /* SCUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4A0000000000000000000062 /* SCUI */; };
@@ -22,6 +24,8 @@
 		4A0000000000000000000022 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A0000000000000000000023 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A0000000000000000000024 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		4A0000000000000000000026 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		4A0000000000000000000027 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		4A0000000000000000000025 /* WIMSC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WIMSC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -56,6 +60,8 @@
 				4A0000000000000000000022 /* Assets.xcassets */,
 				4A0000000000000000000023 /* Info.plist */,
 				4A0000000000000000000024 /* PrivacyInfo.xcprivacy */,
+				4A0000000000000000000026 /* Localizable.xcstrings */,
+				4A0000000000000000000027 /* InfoPlist.xcstrings */,
 			);
 			path = WIMSC;
 			sourceTree = "<group>";
@@ -121,6 +127,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				nb,
 				Base,
 			);
 			mainGroup = 4A0000000000000000000002;
@@ -146,6 +153,8 @@
 			files = (
 				4A0000000000000000000032 /* Assets.xcassets in Resources */,
 				4A0000000000000000000033 /* PrivacyInfo.xcprivacy in Resources */,
+				4A0000000000000000000037 /* Localizable.xcstrings in Resources */,
+				4A0000000000000000000038 /* InfoPlist.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
