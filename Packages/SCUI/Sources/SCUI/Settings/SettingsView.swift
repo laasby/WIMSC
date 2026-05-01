@@ -31,7 +31,7 @@ public struct SettingsView: View {
                                 .foregroundStyle(.green)
                             Spacer()
                             Button("Disconnect", role: .destructive) {
-                                teslaSignOut()
+                                Task { await teslaSignOut() }
                             }
                         }
                     } else {
