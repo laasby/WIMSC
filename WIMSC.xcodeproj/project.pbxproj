@@ -132,8 +132,17 @@
 				4A0000000000000000000026 /* Localizable.xcstrings */,
 				4A0000000000000000000027 /* InfoPlist.xcstrings */,
 				4A150000000000000000B003 /* Intents */,
+				4A160000C001000000000003 /* Tesla */,
 			);
 			path = WIMSC;
+			sourceTree = "<group>";
+		};
+		4A160000C001000000000003 /* Tesla */ = {
+			isa = PBXGroup;
+			children = (
+				4A160000C001000000000001 /* TeslaAuthService.swift */,
+			);
+			path = Tesla;
 			sourceTree = "<group>";
 		};
 		4A150000000000000000B003 /* Intents */ = {
@@ -334,6 +343,7 @@
 				4A0000000000000000000030 /* WIMSCApp.swift in Sources */,
 				4A0000000000000000000031 /* ContentView.swift in Sources */,
 				4A150000000000000000B002 /* FindNearestSuperchargerIntent.swift in Sources */,
+				4A160000C001000000000002 /* TeslaAuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
