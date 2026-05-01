@@ -5,6 +5,7 @@ import SCData
 /// Shows the user exactly what data is stored on-device, and offers a JSON export.
 public struct YourDataView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(CloudSyncManager.self) private var cloudSyncManager
     @State private var favouriteCount: Int = 0
     @State private var visitCount: Int = 0
     @State private var noteCount: Int = 0
@@ -15,6 +16,23 @@ public struct YourDataView: View {
 
     public var body: some View {
         List {
+            Section("iCloud Sync") {
+                DataRow(label: "Status", value: cloudSyncManager.isSyncEnabled ? "Enabled" : "Off")
+                DataRow(label: "Container", value: "iCloud.com.laasby.wimsc")
+            }
+
+            Section("What syncs to iCloud") {
+                ForEach(CloudSyncManager.syncedDataDescription, id: \.item) { entry in
+                    DataRow(label: entry.item, value: entry.detail)
+                }
+            }
+
+            Section("Stays on device only") {
+                ForEach(CloudSyncManager.localOnlyDescription, id: \.item) { entry in
+                    DataRow(label: entry.item, value: entry.detail)
+                }
+            }
+
             Section("What's stored on this device") {
                 DataRow(label: "Favourite sites", value: "\(favouriteCount)")
                 DataRow(label: "Visit records", value: "\(visitCount)")
@@ -22,11 +40,6 @@ public struct YourDataView: View {
                 DataRow(label: "Analytics", value: "None")
                 DataRow(label: "Advertising IDs", value: "None")
                 DataRow(label: "Third-party SDKs", value: "None")
-            }
-
-            Section("iCloud") {
-                DataRow(label: "Sync", value: "Off (opt-in)")
-                DataRow(label: "What syncs", value: "Favourites, notes, visits (if enabled)")
             }
 
             Section {

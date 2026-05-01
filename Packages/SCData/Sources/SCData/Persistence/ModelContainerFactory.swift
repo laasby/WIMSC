@@ -14,6 +14,11 @@ public enum ModelContainerFactory {
         ])
     }
     
+    /// Creates the appropriate ModelContainer using a CloudSyncManager.
+    public static func makeContainer(syncManager: CloudSyncManager) throws -> ModelContainer {
+        return try syncManager.makeContainer()
+    }
+
     /// Creates the persistent ModelContainer for production use.
     public static func makeContainer() throws -> ModelContainer {
         let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)

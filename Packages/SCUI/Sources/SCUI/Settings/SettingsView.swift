@@ -3,10 +3,12 @@ import SwiftData
 import SCData
 
 public struct SettingsView: View {
+    @Environment(CloudSyncManager.self) private var cloudSyncManager
+    @Environment(\.modelContext) private var modelContext
+    @State private var showSyncRestartAlert = false
     @State private var tibberToken: String = ""
     @State private var homeChargerKw: Double = 11
     @State private var homeZone: NOPriceZone = .no1
-    @State private var iCloudSyncEnabled: Bool = false
 
     public init() {}
 
@@ -15,8 +17,7 @@ public struct SettingsView: View {
             Form {
                 Section("Vehicles") {
                     NavigationLink("Manage vehicles") {
-                        Text("Vehicle management coming soon")
-                            .foregroundStyle(.secondary)
+                        VehicleListView(modelContext: modelContext)
                     }
                 }
 
@@ -40,7 +41,13 @@ public struct SettingsView: View {
                 }
 
                 Section("Privacy & Sync") {
-                    Toggle("iCloud Sync", isOn: $iCloudSyncEnabled)
+                    Toggle("iCloud Sync", isOn: Binding(
+                        get: { cloudSyncManager.isSyncEnabled },
+                        set: { newValue in
+                            cloudSyncManager.setSyncEnabled(newValue)
+                            showSyncRestartAlert = true
+                        }
+                    ))
                     NavigationLink("Your Data") {
                         YourDataView()
                     }
@@ -62,6 +69,11 @@ public struct SettingsView: View {
                 }
             }
             .navigationTitle("Settings")
+        }
+        .alert("Restart Required", isPresented: $showSyncRestartAlert) {
+            Button("OK") {}
+        } message: {
+            Text("iCloud sync changes take effect after restarting the app.")
         }
     }
 }

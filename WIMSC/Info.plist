@@ -24,6 +24,18 @@
 	<string>17.0</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>WIMSC uses your location to sort Superchargers by distance and show your position on the map.</string>
+	<key>NSUbiquitousContainers</key>
+	<dict>
+		<key>iCloud.com.laasby.wimsc</key>
+		<dict>
+			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
+			<false/>
+			<key>NSUbiquitousContainerName</key>
+			<string>WIMSC</string>
+			<key>NSUbiquitousContainerSupportedFolderLevels</key>
+			<string>None</string>
+		</dict>
+	</dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
