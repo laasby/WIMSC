@@ -4,7 +4,7 @@ import SCData
 /// Map pin that overlays a colored availability dot when live data is available.
 struct AvailabilityPinView: View {
     let stallCount: Int
-    let generation: SuperchargerGeneration
+    let generation: ChargerGeneration
     let availableStalls: Int
     let totalStalls: Int
 
