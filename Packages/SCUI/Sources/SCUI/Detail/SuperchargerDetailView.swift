@@ -13,6 +13,7 @@ public struct SuperchargerDetailView: View {
     @State private var preconditioningAdvice: PreconditioningAdvice? = nil
     @State private var availability: StallAvailability? = nil
     @State private var waitDescription: String = ""
+    @State private var dwellPlan: DwellPlan? = nil
 
     public init(supercharger: Supercharger, locationService: LocationService) {
         self.supercharger = supercharger
@@ -32,6 +33,7 @@ public struct SuperchargerDetailView: View {
                 specsSection
                 pricingSection
                 amenitiesSection
+                dwellSection
                 weatherSection
                 preconditioningSection
                 if supercharger.country == "NO" {
@@ -65,6 +67,7 @@ public struct SuperchargerDetailView: View {
                 stallCount: supercharger.stallCount,
                 visitHistory: []
             )
+            dwellPlan = DwellTimePlanner.plan(supercharger: supercharger)
         }
         .confirmationDialog(
             "Navigate to \(supercharger.name)",
@@ -366,6 +369,18 @@ public struct SuperchargerDetailView: View {
         case .coveredParking: return "car.fill"
         case .pullThrough:    return "arrow.right.to.line"
         case .lounge:         return "sofa"
+        }
+    }
+
+    // MARK: - Dwell-time section
+
+    private var dwellSection: some View {
+        Group {
+            if let plan = dwellPlan {
+                DetailSection(title: "While You Charge") {
+                    DwellTimePlannerView(plan: plan)
+                }
+            }
         }
     }
 
