@@ -1,16 +1,50 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "NSLocationWhenInUseUsageDescription" : {
+    "CFBundleDisplayName" : {
+      "comment" : "Bundle display name",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "WIMSC uses your location to sort Superchargers by distance and show your position on the map." } },
-        "nb" : { "stringUnit" : { "state" : "translated", "value" : "WIMSC bruker posisjonen din til å sortere superladere etter avstand og vise deg på kartet." } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WIMSC"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WIMSC"
+          }
+        }
       }
     },
-    "CFBundleDisplayName" : {
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "WIMSC" } },
-        "nb" : { "stringUnit" : { "state" : "translated", "value" : "WIMSC" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "WIMSC"
+          }
+        }
+      }
+    },
+    "NSLocationWhenInUseUsageDescription" : {
+      "comment" : "Privacy - Location When In Use Usage Description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WIMSC uses your location to sort Superchargers by distance and show your position on the map."
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WIMSC bruker posisjonen din til å sortere superladere etter avstand og vise deg på kartet."
+          }
+        }
       }
     }
   },

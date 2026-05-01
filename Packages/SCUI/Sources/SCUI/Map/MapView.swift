@@ -17,14 +17,16 @@ public struct MapView: View {
     @State private var showRangeRing: Bool = false
 
     private let locationService: LocationService
+    private let regionBinding: Binding<MKCoordinateRegion>?
 
     private static let defaultRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 62, longitude: 10),
         span: MKCoordinateSpan(latitudeDelta: 20, longitudeDelta: 30)
     )
 
-    public init(locationService: LocationService, modelContext: ModelContext) {
+    public init(locationService: LocationService, modelContext: ModelContext, visibleRegion: Binding<MKCoordinateRegion>? = nil) {
         self.locationService = locationService
+        self.regionBinding = visibleRegion
         _viewModel = State(initialValue: MapViewModel(
             locationService: locationService,
             modelContext: modelContext
@@ -82,6 +84,9 @@ public struct MapView: View {
                 await viewModel.loadAnnotations(in: currentRegion)
                 lastSearchedRegion = currentRegion
             }
+            .onAppear {
+                Task { await viewModel.loadAnnotations(in: currentRegion) }
+            }
         }
     }
 
@@ -106,6 +111,7 @@ public struct MapView: View {
         .mapStyle(.standard)
         .onMapCameraChange(frequency: .onEnd) { context in
             currentRegion = context.region
+            regionBinding?.wrappedValue = context.region
             if hasMoved(from: lastSearchedRegion, to: context.region) {
                 viewModel.isSearchingThisArea = true
             }
