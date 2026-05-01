@@ -67,41 +67,48 @@ public final class SyncEngine {
     // MARK: - Private
     
     private func upsert(dtos: [SuperchargerDTO]) throws {
-        // Fetch existing IDs for fast lookup
+        // Build a dict of existing sites, handling any duplicate IDs gracefully
         let allExisting = try modelContext.fetch(FetchDescriptor<Supercharger>())
-        var existingById = Dictionary(uniqueKeysWithValues: allExisting.map { ($0.id, $0) })
-        
+        var existingById: [String: Supercharger] = [:]
+        for site in allExisting {
+            existingById[site.id] = site   // last writer wins on duplicates
+        }
+
+        let batchSize = 300
+        var count = 0
+
         for dto in dtos {
             let domainId = dto.locationId ?? "site-\(dto.id)"
             if let existing = existingById[domainId] {
                 // Update mutable fields; preserve user data (isFavourite, userNotes)
                 existing.name = dto.name
-                existing.latitude = dto.gps?.lat ?? existing.latitude
-                existing.longitude = dto.gps?.lng ?? existing.longitude
+                existing.latitude  = dto.gps?.resolvedLat ?? existing.latitude
+                existing.longitude = dto.gps?.resolvedLng ?? existing.longitude
                 existing.streetAddress = dto.address?.street ?? existing.streetAddress
-                existing.city = dto.address?.city ?? existing.city
-                existing.state = dto.address?.state ?? existing.state
-                existing.country = dto.address?.country ?? existing.country
-                existing.postalCode = dto.address?.zip ?? existing.postalCode
-                existing.stallCount = dto.stallCount ?? existing.stallCount
-                existing.maxKilowatts = dto.powerKilowatt ?? existing.maxKilowatts
-                existing.is24Hours = dto.open24Hr ?? existing.is24Hours
+                existing.city        = dto.address?.city   ?? existing.city
+                existing.state       = dto.address?.state  ?? existing.state
+                existing.postalCode  = dto.address?.zip    ?? existing.postalCode
+                existing.stallCount  = dto.stallCount      ?? existing.stallCount
+                existing.maxKilowatts = dto.powerKilowatt  ?? existing.maxKilowatts
+                existing.is24Hours   = dto.open24Hr        ?? existing.is24Hours
                 existing.lastSyncedAt = .now
-                // Update status (soft fields only, never hard-delete)
                 if let rawStatus = dto.status {
                     switch rawStatus.uppercased() {
-                    case "OPEN": existing.status = .open
+                    case "OPEN":         existing.status = .open
                     case "CONSTRUCTION": existing.status = .construction
-                    case "CLOSED": existing.status = .closed
-                    case "PERMIT": existing.status = .permit
-                    case "PLAN": existing.status = .plan
+                    case "CLOSED":       existing.status = .closed
+                    case "PERMIT":       existing.status = .permit
+                    case "PLAN":         existing.status = .plan
                     default: break
                     }
                 }
-                existingById[domainId] = nil // mark as processed
             } else {
-                let newSite = dto.toDomain()
-                modelContext.insert(newSite)
+                modelContext.insert(dto.toDomain())
+            }
+
+            count += 1
+            if count % batchSize == 0 {
+                try modelContext.save()   // release memory every 300 records
             }
         }
         try modelContext.save()
