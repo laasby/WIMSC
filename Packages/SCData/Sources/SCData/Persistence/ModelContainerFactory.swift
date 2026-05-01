@@ -11,6 +11,7 @@ public enum ModelContainerFactory {
             VisitRecord.self,
             StallReport.self,
             UserVehicle.self,
+            StallAvailability.self,
         ])
     }
     
