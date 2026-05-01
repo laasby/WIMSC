@@ -31,6 +31,7 @@ struct WIMSCApp: App {
                 .modelContainer(container)
                 .environment(cloudSyncManager)
                 .task {
+                    BundledDataLoader.seedIfNeeded(into: ModelContext(container))
                     if syncEngine.needsSync {
                         await syncEngine.syncAll()
                     }
