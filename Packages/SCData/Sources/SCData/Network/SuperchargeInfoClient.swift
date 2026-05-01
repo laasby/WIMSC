@@ -16,6 +16,11 @@ public struct SuperchargerDTO: Decodable {
     public let amenities: String?
     public let accessNotes: String?
     public let plugType: String?
+    public let otherEVs: Bool?
+    /// stalls dict e.g. {"v4": 16} — used for generation detection
+    public let stalls: [String: Int]?
+    /// plugs dict e.g. {"ccs2": 16, "nacs": 4}
+    public let plugs: [String: Int]?
 
     public struct AddressDTO: Decodable {
         public let street: String?
@@ -26,8 +31,14 @@ public struct SuperchargerDTO: Decodable {
     }
 
     public struct GpsDTO: Decodable {
+        public let latitude: Double?
+        public let longitude: Double?
+        // Legacy field aliases (some endpoints use lat/lng)
         public let lat: Double?
         public let lng: Double?
+
+        public var resolvedLat: Double? { latitude ?? lat }
+        public var resolvedLng: Double? { longitude ?? lng }
     }
 
     /// Converts this DTO into a SwiftData Supercharger model.
@@ -46,19 +57,36 @@ public struct SuperchargerDTO: Decodable {
         
         let kw = powerKilowatt ?? 0
         let generation: ChargerGeneration
-        if kw >= 300 { generation = .v4 }
+        if let stalls = stalls {
+            if stalls["v4"] != nil { generation = .v4 }
+            else if stalls["v3"] != nil { generation = .v3 }
+            else if stalls["v2"] != nil { generation = .v2 }
+            else if kw >= 300 { generation = .v4 }
+            else if kw >= 200 { generation = .v3 }
+            else if kw > 0 { generation = .v2 }
+            else { generation = .unknown }
+        } else if kw >= 300 { generation = .v4 }
         else if kw >= 200 { generation = .v3 }
         else if kw > 0 { generation = .v2 }
         else { generation = .unknown }
         
-        let plugs: [PlugType]
-        switch plugType?.uppercased() {
-        case "NACS": plugs = [.nacs]
-        case "CCS", "CCS2": plugs = [.ccs2]
-        case "TYPE2": plugs = [.type2]
-        case "CHADEMO": plugs = [.chademo]
-        case "NACS,CCS": plugs = [.nacs, .ccs2]
-        default: plugs = [.nacs]
+        let resolvedPlugs: [PlugType]
+        if let plugsDict = plugs, !plugsDict.isEmpty {
+            var types: [PlugType] = []
+            if plugsDict["nacs"] != nil { types.append(.nacs) }
+            if plugsDict["ccs2"] != nil { types.append(.ccs2) }
+            if plugsDict["type2"] != nil { types.append(.type2) }
+            if plugsDict["chademo"] != nil { types.append(.chademo) }
+            resolvedPlugs = types.isEmpty ? [.nacs] : types
+        } else {
+            switch plugType?.uppercased() {
+            case "NACS": resolvedPlugs = [.nacs]
+            case "CCS", "CCS2": resolvedPlugs = [.ccs2]
+            case "TYPE2": resolvedPlugs = [.type2]
+            case "CHADEMO": resolvedPlugs = [.chademo]
+            case "NACS,CCS": resolvedPlugs = [.nacs, .ccs2]
+            default: resolvedPlugs = [.nacs]
+            }
         }
         
         var siteAmenities: [Amenity] = []
@@ -74,15 +102,15 @@ public struct SuperchargerDTO: Decodable {
         }
         
         let gatedAccess = accessNotes?.isEmpty == false
-        let lat = gps?.lat ?? 0
-        let lng = gps?.lng ?? 0
+        let lat = gps?.resolvedLat ?? 0
+        let lng = gps?.resolvedLng ?? 0
         let street = address?.street ?? ""
         let cityStr = address?.city ?? ""
         let stateStr = address?.state ?? ""
-        let countryStr = address?.country ?? ""
+        let countryStr = Self.normalizeCountry(address?.country)
         let zip = address?.zip ?? ""
-        let stalls = stallCount ?? 0
-        let is24 = open24Hr ?? false
+        let stallsCount = stallCount ?? 0
+        let is24 = open24Hr ?? true
         let pullThrough = siteAmenities.contains(.pullThrough)
         
         return Supercharger(
@@ -96,10 +124,10 @@ public struct SuperchargerDTO: Decodable {
             country: countryStr,
             postalCode: zip,
             status: siteStatus,
-            stallCount: stalls,
+            stallCount: stallsCount,
             generation: generation,
             maxKilowatts: kw,
-            plugTypes: plugs,
+            plugTypes: resolvedPlugs,
             is24Hours: is24,
             hasGatedAccess: gatedAccess,
             gatedAccessNotes: accessNotes,
@@ -108,6 +136,23 @@ public struct SuperchargerDTO: Decodable {
             dataSource: .superchargeInfo,
             lastSyncedAt: .now
         )
+    }
+
+    // Maps full country names returned by supercharge.info to ISO 3166-1 alpha-2 codes
+    private static func normalizeCountry(_ name: String?) -> String {
+        guard let name else { return "" }
+        let map: [String: String] = [
+            "Norway": "NO", "Sweden": "SE", "Denmark": "DK", "Finland": "FI",
+            "Germany": "DE", "France": "FR", "Netherlands": "NL", "Belgium": "BE",
+            "Austria": "AT", "Switzerland": "CH", "Spain": "ES", "Portugal": "PT",
+            "Italy": "IT", "United Kingdom": "GB", "Ireland": "IE", "Poland": "PL",
+            "Czech Republic": "CZ", "Slovakia": "SK", "Hungary": "HU", "Romania": "RO",
+            "United States": "US", "Canada": "CA", "Mexico": "MX",
+            "Australia": "AU", "New Zealand": "NZ", "Japan": "JP",
+            "China": "CN", "South Korea": "KR", "Hong Kong": "HK",
+            "Brazil": "BR", "Chile": "CL", "Argentina": "AR"
+        ]
+        return map[name] ?? name
     }
 }
 
@@ -141,7 +186,7 @@ public struct SuperchargeInfoClient {
     
     /// Fetches all known Supercharger sites.
     public func fetchAllSites() async throws -> [SuperchargerDTO] {
-        guard let url = URL(string: "https://supercharge.info/service/supercharger/allSites") else {
+        guard let url = URL(string: "https://supercharge.info/service/supercharge/allSites") else {
             // This URL is a compile-time constant; a nil here is a programmer error.
             preconditionFailure("Invalid hardcoded URL for supercharge.info allSites")
         }
@@ -160,7 +205,7 @@ public struct SuperchargeInfoClient {
     
     /// Fetches detailed information for a single Supercharger site.
     public func fetchSiteDetails(id: String) async throws -> SuperchargerDetailDTO {
-        guard let url = URL(string: "https://supercharge.info/service/supercharger/details?siteId=\(id)") else {
+        guard let url = URL(string: "https://supercharge.info/service/supercharge/details?siteId=\(id)") else {
             preconditionFailure("Invalid URL constructed for siteId: \(id)")
         }
         var request = URLRequest(url: url)
