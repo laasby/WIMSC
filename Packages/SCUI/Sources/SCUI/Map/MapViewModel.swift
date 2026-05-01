@@ -67,7 +67,7 @@ public final class MapViewModel {
                 userLocation: locationService.currentLocation
             )
             annotations = filtered.map { SuperchargerAnnotation(supercharger: $0) }
-            clusterItems = MapClusterer.cluster(annotations: annotations, region: region)
+            clusterItems = MapClusterer.cluster(sites: filtered, region: region)
             isSearchingThisArea = false
         } catch {
             // Non-fatal: leave existing annotations in place

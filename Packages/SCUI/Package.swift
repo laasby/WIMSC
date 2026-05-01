@@ -9,11 +9,12 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../SCDomain"),
+        .package(path: "../SCData"),
     ],
     targets: [
         .target(
             name: "SCUI",
-            dependencies: ["SCDomain"],
+            dependencies: ["SCDomain", "SCData"],
             path: "Sources/SCUI"
         ),
     ]

@@ -15,6 +15,10 @@ public struct SuperchargerDetailView: View {
     @State private var waitDescription: String = ""
     @State private var dwellPlan: DwellPlan? = nil
 
+    @Environment(LiveAvailabilityStore.self) private var liveStore
+    @Environment(\.teslaIsAuthenticated) private var isAuthenticated
+    @Environment(\.teslaSignIn) private var teslaSignIn
+
     public init(supercharger: Supercharger, locationService: LocationService) {
         self.supercharger = supercharger
         self.locationService = locationService
@@ -219,11 +223,17 @@ public struct SuperchargerDetailView: View {
     // MARK: - Availability section
 
     private var availabilitySection: some View {
-        DetailSection(title: "Availability") {
+        let live = liveStore.availabilityFor(supercharger)
+        return DetailSection(title: "Availability") {
             AvailabilityView(
                 availability: availability,
                 stallCount: supercharger.stallCount,
-                waitDescription: waitDescription
+                waitDescription: waitDescription,
+                liveAvailableStalls: live?.availableStalls,
+                liveTotalStalls: live?.totalStalls,
+                liveLastRefreshed: liveStore.lastRefreshed,
+                isAuthenticated: isAuthenticated,
+                onSignIn: { Task { await teslaSignIn() } }
             )
         }
     }

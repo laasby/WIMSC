@@ -16,6 +16,10 @@ public struct MapView: View {
     @State private var rangeRingCalculator = RangeRingCalculator()
     @State private var showRangeRing: Bool = false
 
+    @Environment(LiveAvailabilityStore.self) private var liveStore
+    @Environment(\.teslaIsAuthenticated) private var isAuthenticated
+    @Environment(\.teslaSignIn) private var teslaSignIn
+
     private let locationService: LocationService
     private let regionBinding: Binding<MKCoordinateRegion>?
 
@@ -96,14 +100,29 @@ public struct MapView: View {
         Map(position: $mapCameraPosition, selection: $selectedID) {
             ForEach(viewModel.clusterItems) { item in
                 switch item {
-                case .single(let ann):
-                    Marker(
-                        "⚡ \(ann.supercharger.stallCount)",
-                        systemImage: GenerationPinStyle.systemImage(for: ann.supercharger.generation),
-                        coordinate: ann.coordinate
-                    )
-                    .tint(GenerationPinStyle.color(for: ann.supercharger.generation))
-                    .tag(ann.supercharger.id)
+                case .single(let sc):
+                    let scCoord = CLLocationCoordinate2D(latitude: sc.latitude, longitude: sc.longitude)
+                    let live = liveStore.availabilityFor(sc)
+                    if let live = live {
+                        Annotation(sc.id, coordinate: scCoord, anchor: .bottom) {
+                            AvailabilityPinView(
+                                stallCount: sc.stallCount,
+                                generation: sc.generation,
+                                availableStalls: live.availableStalls,
+                                totalStalls: live.totalStalls
+                            )
+                            .onTapGesture { selectedID = sc.id }
+                        }
+                        .tag(sc.id)
+                    } else {
+                        Marker(
+                            "⚡ \(sc.stallCount)",
+                            systemImage: GenerationPinStyle.systemImage(for: sc.generation),
+                            coordinate: scCoord
+                        )
+                        .tint(GenerationPinStyle.color(for: sc.generation))
+                        .tag(sc.id)
+                    }
 
                 case .cluster(let id, let count, let coord, let generation):
                     Annotation(id, coordinate: coord, anchor: .center) {
@@ -125,6 +144,17 @@ public struct MapView: View {
             regionBinding?.wrappedValue = context.region
             if hasMoved(from: lastSearchedRegion, to: context.region) {
                 viewModel.isSearchingThisArea = true
+            }
+            if isAuthenticated {
+                let center = context.region.center
+                let allSites = viewModel.annotations.map { $0.supercharger }
+                Task {
+                    await liveStore.refresh(
+                        latitude: center.latitude,
+                        longitude: center.longitude,
+                        allSites: allSites
+                    )
+                }
             }
         }
         .ignoresSafeArea(edges: .top)

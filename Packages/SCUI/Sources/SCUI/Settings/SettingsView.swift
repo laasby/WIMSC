@@ -5,6 +5,9 @@ import SCData
 public struct SettingsView: View {
     @Environment(CloudSyncManager.self) private var cloudSyncManager
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.teslaIsAuthenticated) private var teslaIsAuthenticated
+    @Environment(\.teslaSignIn) private var teslaSignIn
+    @Environment(\.teslaSignOut) private var teslaSignOut
     @State private var showSyncRestartAlert = false
     @State private var tibberToken: String = ""
     @State private var homeChargerKw: Double = 11
@@ -18,6 +21,34 @@ public struct SettingsView: View {
                 Section("Vehicles") {
                     NavigationLink("Manage vehicles") {
                         VehicleListView(modelContext: modelContext)
+                    }
+                }
+
+                Section("Tesla Account") {
+                    if teslaIsAuthenticated {
+                        HStack {
+                            Label("Connected", systemImage: "checkmark.circle.fill")
+                                .foregroundStyle(.green)
+                            Spacer()
+                            Button("Disconnect", role: .destructive) {
+                                teslaSignOut()
+                            }
+                        }
+                    } else {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("Connect your Tesla account for real-time stall availability on the map and in station details.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Button {
+                                Task { await teslaSignIn() }
+                            } label: {
+                                Label("Sign in with Tesla", systemImage: "bolt.car.fill")
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(.red)
+                        }
+                        .padding(.vertical, 4)
                     }
                 }
 

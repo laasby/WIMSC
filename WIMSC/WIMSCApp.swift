@@ -7,6 +7,8 @@ struct WIMSCApp: App {
     private let container: ModelContainer
     @State private var syncEngine: SyncEngine
     @State private var cloudSyncManager = CloudSyncManager()
+    @State private var teslaAuthService = TeslaAuthService()
+    @State private var liveAvailabilityStore = LiveAvailabilityStore()
 
     @MainActor
     init() {
@@ -30,10 +32,33 @@ struct WIMSCApp: App {
             ContentView()
                 .modelContainer(container)
                 .environment(cloudSyncManager)
+                .environment(liveAvailabilityStore)
+                .environment(\.teslaIsAuthenticated, teslaAuthService.isAuthenticated)
+                .environment(\.teslaSignIn) {
+                    await teslaAuthService.signIn()
+                    if teslaAuthService.isAuthenticated {
+                        liveAvailabilityStore.tokenProvider = { [weak teslaAuthService] in
+                            guard let svc = teslaAuthService else { throw TeslaAuthError.notAuthenticated }
+                            return try await svc.refreshIfNeeded()
+                        }
+                    }
+                }
+                .environment(\.teslaSignOut) {
+                    teslaAuthService.signOut()
+                    liveAvailabilityStore.tokenProvider = nil
+                    liveAvailabilityStore.availability = [:]
+                }
                 .task {
                     BundledDataLoader.seedIfNeeded(into: ModelContext(container))
                     if syncEngine.needsSync {
                         await syncEngine.syncAll()
+                    }
+                    // Wire token provider if already authenticated from keychain
+                    if teslaAuthService.isAuthenticated {
+                        liveAvailabilityStore.tokenProvider = { [weak teslaAuthService] in
+                            guard let svc = teslaAuthService else { throw TeslaAuthError.notAuthenticated }
+                            return try await svc.refreshIfNeeded()
+                        }
                     }
                 }
         }
