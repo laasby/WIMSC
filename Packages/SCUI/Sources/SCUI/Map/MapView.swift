@@ -94,14 +94,25 @@ public struct MapView: View {
 
     private var mapLayer: some View {
         Map(position: $mapCameraPosition, selection: $selectedID) {
-            ForEach(viewModel.annotations, id: \.supercharger.id) { ann in
-                Marker(
-                    "⚡ \(ann.supercharger.stallCount)",
-                    systemImage: GenerationPinStyle.systemImage(for: ann.supercharger.generation),
-                    coordinate: ann.coordinate
-                )
-                .tint(GenerationPinStyle.color(for: ann.supercharger.generation))
-                .tag(ann.supercharger.id)
+            ForEach(viewModel.clusterItems) { item in
+                switch item {
+                case .single(let ann):
+                    Marker(
+                        "⚡ \(ann.supercharger.stallCount)",
+                        systemImage: GenerationPinStyle.systemImage(for: ann.supercharger.generation),
+                        coordinate: ann.coordinate
+                    )
+                    .tint(GenerationPinStyle.color(for: ann.supercharger.generation))
+                    .tag(ann.supercharger.id)
+
+                case .cluster(let id, let count, let coord, let generation):
+                    Annotation(id, coordinate: coord, anchor: .center) {
+                        ClusterMarkerView(count: count, generation: generation) {
+                            let zoomed = MapClusterer.zoomedRegion(centeredOn: coord, current: currentRegion)
+                            withAnimation { mapCameraPosition = .region(zoomed) }
+                        }
+                    }
+                }
             }
             UserAnnotation()
             if showRangeRing {

@@ -25,6 +25,7 @@ public final class MapViewModel {
 
     public var region: MKCoordinateRegion = MapViewModel.defaultRegion
     public var annotations: [SuperchargerAnnotation] = []
+    public var clusterItems: [MapClusterItem] = []
     public var selectedSupercharger: Supercharger?
     public var isSearchingThisArea: Bool = false
     public var filterCriteria: FilterCriteria = .default
@@ -66,6 +67,7 @@ public final class MapViewModel {
                 userLocation: locationService.currentLocation
             )
             annotations = filtered.map { SuperchargerAnnotation(supercharger: $0) }
+            clusterItems = MapClusterer.cluster(annotations: annotations, region: region)
             isSearchingThisArea = false
         } catch {
             // Non-fatal: leave existing annotations in place
