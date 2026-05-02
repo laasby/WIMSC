@@ -12,6 +12,7 @@ public struct MapView: View {
     @State private var navigationPath: [Supercharger] = []
     @State private var showDetailSheet: Bool = false
     @State private var selectedID: String?
+    @State private var mapStyleMode: MapStyleMode = .standard
 
     @Environment(\.liveAvailability) private var liveStore
     @Environment(\.teslaTokenProvider) private var tokenProvider
@@ -117,7 +118,7 @@ public struct MapView: View {
             }
             UserAnnotation()
         }
-        .mapStyle(.standard)
+        .mapStyle(mapStyleMode.mapStyle)
         .mapControls { }
         .onMapCameraChange(frequency: .onEnd) { context in
             currentRegion = context.region
@@ -155,6 +156,7 @@ public struct MapView: View {
                 filterChipsRow
                 Spacer()
                 zoomControls
+                mapStyleButton
                 recenterButton
             }
             .padding(.horizontal, 16)
@@ -239,6 +241,22 @@ public struct MapView: View {
         withAnimation { mapCameraPosition = .region(MKCoordinateRegion(center: currentRegion.center, span: newSpan)) }
     }
 
+    // MARK: - Map style toggle
+
+    private var mapStyleButton: some View {
+        Button {
+            mapStyleMode = mapStyleMode.next
+        } label: {
+            Image(systemName: mapStyleMode.systemImage)
+                .font(.system(size: 18, weight: .semibold))
+                .padding(12)
+                .background(.regularMaterial, in: Circle())
+                .shadow(radius: 4, y: 2)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Map style: \(mapStyleMode.label)")
+    }
+
     // MARK: - Recenter button
 
     private var recenterButton: some View {
@@ -255,3 +273,38 @@ public struct MapView: View {
 
 }
 
+// MARK: - MapStyleMode
+
+enum MapStyleMode: CaseIterable {
+    case standard, hybrid, imagery
+
+    var label: String {
+        switch self {
+        case .standard: "Standard"
+        case .hybrid:   "Hybrid"
+        case .imagery:  "Satellite"
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .standard: "map"
+        case .hybrid:   "globe.europe.africa"
+        case .imagery:  "globe.europe.africa.fill"
+        }
+    }
+
+    var mapStyle: MapStyle {
+        switch self {
+        case .standard: .standard
+        case .hybrid:   .hybrid(elevation: .realistic)
+        case .imagery:  .imagery(elevation: .realistic)
+        }
+    }
+
+    var next: MapStyleMode {
+        let all = MapStyleMode.allCases
+        let idx = all.firstIndex(of: self)!
+        return all[(idx + 1) % all.count]
+    }
+}
