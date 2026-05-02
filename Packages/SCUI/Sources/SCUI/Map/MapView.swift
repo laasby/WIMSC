@@ -100,10 +100,10 @@ public struct MapView: View {
                     let live = liveStore?.availability(forLatitude: sc.latitude, longitude: sc.longitude)
                     Marker(
                         pinLabel(sc: sc, live: live),
-                        systemImage: GenerationPinStyle.systemImage(for: sc.generation),
+                        systemImage: GenerationPinStyle.pinSystemImage(for: sc.generation, status: sc.status),
                         coordinate: CLLocationCoordinate2D(latitude: sc.latitude, longitude: sc.longitude)
                     )
-                    .tint(GenerationPinStyle.color(for: sc.generation))
+                    .tint(GenerationPinStyle.pinColor(for: sc.generation, status: sc.status))
                     .tag(sc.id)
 
                 case .cluster(let id, let count, let coord, let generation):
@@ -139,6 +139,7 @@ public struct MapView: View {
     }
 
     private func pinLabel(sc: Supercharger, live: TeslaChargerSite?) -> String {
+        if sc.status == .construction { return "🚧 \(sc.stallCount)" }
         if let live {
             return live.isClosed ? "🔒 Closed" : "✅ \(live.availableStalls)/\(live.totalStalls)"
         }

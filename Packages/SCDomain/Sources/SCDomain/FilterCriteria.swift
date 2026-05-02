@@ -21,7 +21,7 @@ public struct FilterCriteria: Equatable {
     public init(
         generations: Set<ChargerGeneration> = [],
         minimumKilowatts: Int? = nil,
-        statuses: Set<SiteStatus> = [.open],
+        statuses: Set<SiteStatus> = [.open, .construction],
         countries: Set<String> = [],
         amenities: Set<Amenity> = [],
         plugTypes: Set<PlugType> = [],
@@ -36,11 +36,11 @@ public struct FilterCriteria: Equatable {
         self.favouritesOnly = favouritesOnly
     }
     
-    /// Default filter: open sites only, no other restrictions.
+    /// Default filter: open and under-construction sites, no other restrictions.
     public static let `default` = FilterCriteria(
         generations: [],
         minimumKilowatts: nil,
-        statuses: [.open],
+        statuses: [.open, .construction],
         countries: [],
         amenities: [],
         plugTypes: [],

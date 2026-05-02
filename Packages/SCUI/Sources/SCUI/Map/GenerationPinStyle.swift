@@ -18,6 +18,11 @@ public enum GenerationPinStyle {
         }
     }
 
+    /// Resolved pin tint — construction sites always appear gray.
+    public static func pinColor(for generation: ChargerGeneration, status: SiteStatus) -> Color {
+        status == .open ? color(for: generation) : .gray
+    }
+
     /// SF Symbol name for the pin marker.
     public static func systemImage(for generation: ChargerGeneration) -> String {
         switch generation {
@@ -26,6 +31,11 @@ public enum GenerationPinStyle {
         case .v2:      return "bolt.fill"
         case .unknown: return "questionmark.circle"
         }
+    }
+
+    /// Resolved pin icon — construction sites show a hammer.
+    public static func pinSystemImage(for generation: ChargerGeneration, status: SiteStatus) -> String {
+        status == .open ? systemImage(for: generation) : "hammer.fill"
     }
 
     /// Short display label, e.g. "V4".
