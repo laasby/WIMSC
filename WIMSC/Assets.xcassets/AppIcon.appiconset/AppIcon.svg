@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <rect width="1024" height="1024" rx="200" fill="#1C1C1E"/>
+
+  <radialGradient id="glow" cx="50%" cy="52%" r="44%">
+    <stop offset="0%" stop-color="#E62211" stop-opacity="0.18"/>
+    <stop offset="100%" stop-color="#E62211" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1024" height="1024" rx="200" fill="url(#glow)"/>
+
+  <!-- Power ring: center (512,530) radius 295, 60° gap at top
+       Right gap (300°): (659, 275)   Left gap (240°): (365, 275) -->
+  <path d="M 659,275 A 295,295 0 1,1 365,275"
+        fill="none" stroke="#E62211" stroke-width="56" stroke-linecap="round"/>
+
+  <!-- Power line through gap: from top down to inner ring -->
+  <line x1="512" y1="148" x2="512" y2="350"
+        stroke="#E62211" stroke-width="56" stroke-linecap="round"/>
+
+  <!-- Lightning bolt inside ring — Tesla charging symbol
+       Bold filled shape, centered at (512, 580) -->
+  <path d="M 572,348 L 648,552 L 574,552 L 628,778
+           L 376,552 L 452,552 L 378,348 Z"
+        fill="#E62211"/>
+</svg>
