@@ -12,6 +12,8 @@ public struct SuperchargerDetailView: View {
     @State private var showNavigateSheet = false
 
 
+    @Environment(\.liveAvailability) private var liveStore
+
     public init(supercharger: Supercharger, locationService: LocationService) {
         self.supercharger = supercharger
         self.locationService = locationService
@@ -188,8 +190,9 @@ public struct SuperchargerDetailView: View {
     // MARK: - Availability section
 
     private var availabilitySection: some View {
-        DetailSection(title: "Availability") {
-            AvailabilityView(stallCount: supercharger.stallCount)
+        let live = liveStore?.availability(forLatitude: supercharger.latitude, longitude: supercharger.longitude)
+        return DetailSection(title: "Availability") {
+            AvailabilityView(stallCount: supercharger.stallCount, live: live)
         }
     }
 

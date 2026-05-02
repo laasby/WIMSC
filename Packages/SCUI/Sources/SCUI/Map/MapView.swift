@@ -13,6 +13,9 @@ public struct MapView: View {
     @State private var showDetailSheet: Bool = false
     @State private var selectedID: String?
 
+    @Environment(\.liveAvailability) private var liveStore
+    @Environment(\.teslaTokenProvider) private var tokenProvider
+
     private let locationService: LocationService
     private let regionBinding: Binding<MKCoordinateRegion>?
 
@@ -40,11 +43,9 @@ public struct MapView: View {
             .navigationDestination(for: Supercharger.self) { site in
                 SuperchargerDetailView(supercharger: site, locationService: locationService)
             }
-            // Sync programmatic region changes (e.g. recenter) to camera
             .onChange(of: viewModel.region) { _, newRegion in
                 withAnimation { mapCameraPosition = .region(newRegion) }
             }
-            // Handle annotation selection
             .onChange(of: selectedID) { _, newID in
                 if let id = newID,
                    let ann = viewModel.annotations.first(where: { $0.supercharger.id == id }) {
@@ -93,8 +94,9 @@ public struct MapView: View {
             ForEach(viewModel.clusterItems) { item in
                 switch item {
                 case .single(let sc):
+                    let live = liveStore?.availability(forLatitude: sc.latitude, longitude: sc.longitude)
                     Marker(
-                        "⚡ \(sc.stallCount)",
+                        pinLabel(sc: sc, live: live),
                         systemImage: GenerationPinStyle.systemImage(for: sc.generation),
                         coordinate: CLLocationCoordinate2D(latitude: sc.latitude, longitude: sc.longitude)
                     )
@@ -118,9 +120,26 @@ public struct MapView: View {
             currentRegion = context.region
             regionBinding?.wrappedValue = context.region
             let region = context.region
-            Task { await viewModel.loadAnnotations(in: region) }
+            Task {
+                await viewModel.loadAnnotations(in: region)
+                await refreshLiveAvailability(center: region.center)
+            }
         }
         .ignoresSafeArea(edges: .top)
+    }
+
+    // MARK: - Live availability
+
+    private func refreshLiveAvailability(center: CLLocationCoordinate2D) async {
+        guard let store = liveStore, let provider = tokenProvider else { return }
+        await store.refresh(latitude: center.latitude, longitude: center.longitude, tokenProvider: provider)
+    }
+
+    private func pinLabel(sc: Supercharger, live: TeslaChargerSite?) -> String {
+        if let live {
+            return live.isClosed ? "🔒 Closed" : "✅ \(live.availableStalls)/\(live.totalStalls)"
+        }
+        return "⚡ \(sc.stallCount)"
     }
 
     // MARK: - Overlay layer
@@ -128,8 +147,6 @@ public struct MapView: View {
     private var overlayLayer: some View {
         VStack(spacing: 0) {
             Spacer()
-
-            // Bottom bar: filter chips + zoom controls + recenter button
             HStack(alignment: .center, spacing: 12) {
                 filterChipsRow
                 Spacer()
@@ -137,7 +154,7 @@ public struct MapView: View {
                 recenterButton
             }
             .padding(.horizontal, 16)
-            .padding(.bottom, 96) // above tab bar
+            .padding(.bottom, 96)
         }
     }
 
@@ -193,10 +210,8 @@ public struct MapView: View {
 
     private var zoomControls: some View {
         HStack(spacing: 0) {
-            zoomButton(systemImage: "plus", action: { zoom(factor: 0.5) })
-            Divider()
-                .frame(height: 22)
-                .foregroundStyle(.secondary)
+            zoomButton(systemImage: "plus",  action: { zoom(factor: 0.5) })
+            Divider().frame(height: 22).foregroundStyle(.secondary)
             zoomButton(systemImage: "minus", action: { zoom(factor: 2.0) })
         }
         .background(.regularMaterial, in: Capsule())
@@ -217,16 +232,13 @@ public struct MapView: View {
             latitudeDelta:  max(0.002, min(160, currentRegion.span.latitudeDelta  * factor)),
             longitudeDelta: max(0.002, min(360, currentRegion.span.longitudeDelta * factor))
         )
-        let newRegion = MKCoordinateRegion(center: currentRegion.center, span: newSpan)
-        withAnimation { mapCameraPosition = .region(newRegion) }
+        withAnimation { mapCameraPosition = .region(MKCoordinateRegion(center: currentRegion.center, span: newSpan)) }
     }
 
     // MARK: - Recenter button
 
     private var recenterButton: some View {
-        Button {
-            viewModel.recenter()
-        } label: {
+        Button { viewModel.recenter() } label: {
             Image(systemName: "location.fill")
                 .font(.system(size: 18, weight: .semibold))
                 .padding(12)
@@ -235,8 +247,6 @@ public struct MapView: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel("Re-center map on my location")
-        .accessibilityHint("Moves the map to your current position")
-        .accessibilityAddTraits(.isButton)
     }
 
 }
