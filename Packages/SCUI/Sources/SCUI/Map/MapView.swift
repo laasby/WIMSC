@@ -13,10 +13,6 @@ public struct MapView: View {
     @State private var showDetailSheet: Bool = false
     @State private var selectedID: String?
 
-    @Environment(LiveAvailabilityStore.self) private var liveStore
-    @Environment(\.teslaIsAuthenticated) private var isAuthenticated
-    @Environment(\.teslaSignIn) private var teslaSignIn
-
     private let locationService: LocationService
     private let regionBinding: Binding<MKCoordinateRegion>?
 
@@ -97,28 +93,13 @@ public struct MapView: View {
             ForEach(viewModel.clusterItems) { item in
                 switch item {
                 case .single(let sc):
-                    let scCoord = CLLocationCoordinate2D(latitude: sc.latitude, longitude: sc.longitude)
-                    let live = liveStore.availabilityFor(sc)
-                    if let live = live {
-                        Annotation(sc.id, coordinate: scCoord, anchor: .bottom) {
-                            AvailabilityPinView(
-                                stallCount: sc.stallCount,
-                                generation: sc.generation,
-                                availableStalls: live.availableStalls,
-                                totalStalls: live.totalStalls
-                            )
-                            .onTapGesture { selectedID = sc.id }
-                        }
-                        .tag(sc.id)
-                    } else {
-                        Marker(
-                            "⚡ \(sc.stallCount)",
-                            systemImage: GenerationPinStyle.systemImage(for: sc.generation),
-                            coordinate: scCoord
-                        )
-                        .tint(GenerationPinStyle.color(for: sc.generation))
-                        .tag(sc.id)
-                    }
+                    Marker(
+                        "⚡ \(sc.stallCount)",
+                        systemImage: GenerationPinStyle.systemImage(for: sc.generation),
+                        coordinate: CLLocationCoordinate2D(latitude: sc.latitude, longitude: sc.longitude)
+                    )
+                    .tint(GenerationPinStyle.color(for: sc.generation))
+                    .tag(sc.id)
 
                 case .cluster(let id, let count, let coord, let generation):
                     Annotation(id, coordinate: coord, anchor: .center) {
@@ -137,18 +118,7 @@ public struct MapView: View {
             currentRegion = context.region
             regionBinding?.wrappedValue = context.region
             let region = context.region
-            let center = context.region.center
-            let authenticated = isAuthenticated
-            Task {
-                await viewModel.loadAnnotations(in: region)
-                if authenticated {
-                    await liveStore.refresh(
-                        latitude: center.latitude,
-                        longitude: center.longitude,
-                        allSites: viewModel.annotations.map { $0.supercharger }
-                    )
-                }
-            }
+            Task { await viewModel.loadAnnotations(in: region) }
         }
         .ignoresSafeArea(edges: .top)
     }

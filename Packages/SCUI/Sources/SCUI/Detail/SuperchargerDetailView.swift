@@ -11,9 +11,6 @@ public struct SuperchargerDetailView: View {
     @State private var viewModel: DetailViewModel
     @State private var showNavigateSheet = false
 
-    @Environment(LiveAvailabilityStore.self) private var liveStore
-    @Environment(\.teslaIsAuthenticated) private var isAuthenticated
-    @Environment(\.teslaSignIn) private var teslaSignIn
 
     public init(supercharger: Supercharger, locationService: LocationService) {
         self.supercharger = supercharger
@@ -191,24 +188,8 @@ public struct SuperchargerDetailView: View {
     // MARK: - Availability section
 
     private var availabilitySection: some View {
-        let live = liveStore.availabilityFor(supercharger)
-        let stalls = supercharger.stallCount
-        let waitDesc: String = {
-            if stalls >= 20 { return "Usually short waits at this large site" }
-            if stalls >= 10 { return "Typically a short wait during peak hours" }
-            return "May have waits during busy periods"
-        }()
-        return DetailSection(title: "Availability") {
-            AvailabilityView(
-                availability: nil,
-                stallCount: stalls,
-                waitDescription: waitDesc,
-                liveAvailableStalls: live?.availableStalls,
-                liveTotalStalls: live?.totalStalls,
-                liveLastRefreshed: liveStore.lastRefreshed,
-                isAuthenticated: isAuthenticated,
-                onSignIn: { Task { await teslaSignIn() } }
-            )
+        DetailSection(title: "Availability") {
+            AvailabilityView(stallCount: supercharger.stallCount)
         }
     }
 
