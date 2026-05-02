@@ -4,7 +4,8 @@ import Observation
 /// Observable store for live Supercharger availability fetched from the Tesla Fleet API.
 /// Inject via environment; views that read `sites` automatically re-render on updates.
 @Observable
-public final class LiveAvailabilityStore: @unchecked Sendable {
+@MainActor
+public final class LiveAvailabilityStore {
 
     public private(set) var sites: [TeslaChargerSite] = []
     public private(set) var isFetching: Bool = false

@@ -82,7 +82,10 @@ public struct MapView: View {
                 await viewModel.loadAnnotations(in: currentRegion)
             }
             .onAppear {
-                Task { await viewModel.loadAnnotations(in: currentRegion) }
+                Task {
+                    await viewModel.loadAnnotations(in: currentRegion)
+                    await refreshLiveAvailability(center: currentRegion.center)
+                }
             }
         }
     }
