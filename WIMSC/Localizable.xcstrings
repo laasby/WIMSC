@@ -1,1189 +1,1187 @@
 {
-  "sourceLanguage" : "en",
-  "strings" : {
-    "amenity.coffee" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Coffee"
+  "sourceLanguage": "en",
+  "strings": {
+    "amenity.coffee": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coffee"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kaffe"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaffe"
           }
         }
       }
     },
-    "amenity.coveredParking" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Covered Parking"
+    "amenity.coveredParking": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Covered Parking"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Overbygget parkering"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Overbygget parkering"
           }
         }
       }
     },
-    "amenity.food" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Food"
+    "amenity.food": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Food"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mat"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mat"
           }
         }
       }
     },
-    "amenity.lounge" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lounge"
+    "amenity.lounge": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lounge"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lounge"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lounge"
           }
         }
       }
     },
-    "amenity.pullThrough" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pull-through Stalls"
+    "amenity.pullThrough": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pull-through Stalls"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gjennomkjøring"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gjennomkjøring"
           }
         }
       }
     },
-    "amenity.restrooms" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restrooms"
+    "amenity.restrooms": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restrooms"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toaletter"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toaletter"
           }
         }
       }
     },
-    "amenity.shops" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Shops"
+    "amenity.shops": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shops"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Butikker"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Butikker"
           }
         }
       }
     },
-    "amenity.wifi" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wi-Fi"
+    "amenity.wifi": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wi-Fi"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wi-Fi"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wi-Fi"
           }
         }
       }
     },
-    "Any generation" : {
-      "comment" : "Case representation for the \"Generation\" parameter of the \"Find Nearest Supercharger\" intent.",
-      "isCommentAutoGenerated" : true
+    "Any generation": {
+      "comment": "Case representation for the \"Generation\" parameter of the \"Find Nearest Supercharger\" intent.",
+      "isCommentAutoGenerated": true
     },
-    "Charger Generation" : {
-      "comment" : "Name of the type used to display the generation preference for Superchargers.",
-      "isCommentAutoGenerated" : true
+    "Charger Generation": {
+      "comment": "Name of the type used to display the generation preference for Superchargers.",
+      "isCommentAutoGenerated": true
     },
-    "credits.title" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Data Sources"
+    "credits.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data Sources"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Datakilder"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datakilder"
           }
         }
       }
     },
-    "date.unknown" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unknown"
+    "date.unknown": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unknown"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ukjent"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ukjent"
           }
         }
       }
     },
-    "detail.coldSoak.warning" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Battery may be cold-soaked. Expect reduced charging speed until the pack warms up."
+    "detail.coldSoak.warning": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Battery may be cold-soaked. Expect reduced charging speed until the pack warms up."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Batteriet kan være nedkjølt. Forvent redusert ladehastighet til pakken varmes opp."
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batteriet kan være nedkjølt. Forvent redusert ladehastighet til pakken varmes opp."
           }
         }
       }
     },
-    "detail.navigate" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navigate"
+    "detail.navigate": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Navigate"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Naviger"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naviger"
           }
         }
       }
     },
-    "detail.noAmenities" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No amenity data"
+    "detail.noAmenities": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No amenity data"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen fasilitetdata"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ingen fasilitetdata"
           }
         }
       }
     },
-    "detail.noPricing" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pricing info not available"
+    "detail.noPricing": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pricing info not available"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prisinformasjon ikke tilgjengelig"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prisinformasjon ikke tilgjengelig"
           }
         }
       }
     },
-    "detail.noReports" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No recent community reports."
+    "detail.noReports": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No recent community reports."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen nylige rapporter fra brukere."
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ingen nylige rapporter fra brukere."
           }
         }
       }
     },
-    "detail.section.amenities" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Amenities"
+    "detail.section.amenities": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amenities"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fasiliteter"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fasiliteter"
           }
         }
       }
     },
-    "detail.section.pricing" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pricing"
+    "detail.section.pricing": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pricing"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prising"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prising"
           }
         }
       }
     },
-    "detail.section.reports" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recent Reports"
+    "detail.section.reports": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recent Reports"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nylige rapporter"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nylige rapporter"
           }
         }
       }
     },
-    "detail.section.specs" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Specifications"
+    "detail.section.specs": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Specifications"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spesifikasjoner"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spesifikasjoner"
           }
         }
       }
     },
-    "detail.section.weather" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weather"
+    "detail.section.weather": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weather"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vær"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vær"
           }
         }
       }
     },
-    "detail.share" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Share"
+    "detail.share": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Del"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Del"
           }
         }
       }
     },
-    "filter.done" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Done"
+    "filter.done": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ferdig"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ferdig"
           }
         }
       }
     },
-    "filter.favouritesOnly" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Favourites only"
+    "filter.favouritesOnly": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favourites only"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kun favoritter"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kun favoritter"
           }
         }
       }
     },
-    "filter.reset" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reset to defaults"
+    "filter.reset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset to defaults"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tilbakestill"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tilbakestill"
           }
         }
       }
     },
-    "filter.section.amenities" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Amenities"
+    "filter.section.amenities": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amenities"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fasiliteter"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fasiliteter"
           }
         }
       }
     },
-    "filter.section.favourites" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Favourites"
+    "filter.section.favourites": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favourites"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Favoritter"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favoritter"
           }
         }
       }
     },
-    "filter.section.generation" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Generation"
+    "filter.section.generation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generation"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Generasjon"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generasjon"
           }
         }
       }
     },
-    "filter.section.plugTypes" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plug Types"
+    "filter.section.plugTypes": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plug Types"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kontakttyper"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontakttyper"
           }
         }
       }
     },
-    "filter.section.power" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Minimum Power"
+    "filter.section.power": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minimum Power"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Minimum effekt"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minimum effekt"
           }
         }
       }
     },
-    "filter.section.status" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Status"
+    "filter.section.status": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Status"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status"
           }
         }
       }
     },
-    "filter.title" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filters"
+    "filter.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filters"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filtre"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtre"
           }
         }
       }
     },
-    "Find Nearest Supercharger" : {
-      "comment" : "Title of the \"Find Nearest Supercharger\" intent.",
-      "isCommentAutoGenerated" : true
+    "Find Nearest Supercharger": {
+      "comment": "Title of the \"Find Nearest Supercharger\" intent.",
+      "isCommentAutoGenerated": true
     },
-    "Finds the nearest open Tesla Supercharger of the specified generation." : {
-      "comment" : "Description of the \"Find Nearest Supercharger\" intent.",
-      "isCommentAutoGenerated" : true
+    "Finds the nearest open Tesla Supercharger of the specified generation.": {
+      "comment": "Description of the \"Find Nearest Supercharger\" intent.",
+      "isCommentAutoGenerated": true
     },
-    "Generation" : {
-      "comment" : "Title of the parameter for specifying the charger generation.",
-      "isCommentAutoGenerated" : true
+    "Generation": {
+      "comment": "Title of the parameter for specifying the charger generation.",
+      "isCommentAutoGenerated": true
     },
-    "generation.unknown" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unknown"
+    "generation.unknown": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unknown"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ukjent"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ukjent"
           }
         }
       }
     },
-    "generation.v2" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "V2 (150 kW)"
+    "generation.v2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V2 (150 kW)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "V2 (150 kW)"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V2 (150 kW)"
           }
         }
       }
     },
-    "generation.v3" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "V3 (250 kW)"
+    "generation.v3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V3 (250 kW)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "V3 (250 kW)"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V3 (250 kW)"
           }
         }
       }
     },
-    "generation.v4" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "V4 (325 kW)"
+    "generation.v4": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V4 (325 kW)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "V4 (325 kW)"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V4 (325 kW)"
           }
         }
       }
     },
-    "List" : {
-
-    },
-    "list.empty.description" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Try adjusting your filters or search."
+    "List": {},
+    "list.empty.description": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try adjusting your filters or search."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prøv å justere filtrene eller søket."
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prøv å justere filtrene eller søket."
           }
         }
       }
     },
-    "list.empty.title" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Superchargers"
+    "list.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Superchargers"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen superladere"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ingen superladere"
           }
         }
       }
     },
-    "list.search.prompt" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search by name or city"
+    "list.search.prompt": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search by name or city"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Søk etter navn eller by"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Søk etter navn eller by"
           }
         }
       }
     },
-    "list.title" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Superchargers"
+    "list.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Superchargers"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Superladere"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Superladere"
           }
         }
       }
     },
-    "Map" : {
-      "comment" : "The label for the \"Map\" tab in the main view.",
-      "isCommentAutoGenerated" : true
+    "Map": {
+      "comment": "The label for the \"Map\" tab in the main view.",
+      "isCommentAutoGenerated": true
     },
-    "map.recenter" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recenter"
+    "map.recenter": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recenter"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sentrer"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sentrer"
           }
         }
       }
     },
-    "map.searchThisArea" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search this area"
+    "map.searchThisArea": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search this area"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Søk i dette området"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Søk i dette området"
           }
         }
       }
     },
-    "No open %@Superchargers found." : {
-      "comment" : "Text to be spoken when no Superchargers match the specified criteria are found. The argument is the capitalized generation type (e.g. \"V2\").",
-      "isCommentAutoGenerated" : true
+    "No open %@Superchargers found.": {
+      "comment": "Text to be spoken when no Superchargers match the specified criteria are found. The argument is the capitalized generation type (e.g. \"V2\").",
+      "isCommentAutoGenerated": true
     },
-    "nordic.arbitrage.home" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Charge at home tonight — it's cheaper"
+    "nordic.arbitrage.home": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Charge at home tonight — it's cheaper"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lad hjemme i natt — det er billigere"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lad hjemme i natt — det er billigere"
           }
         }
       }
     },
-    "nordic.arbitrage.supercharge" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supercharging is cheaper right now"
+    "nordic.arbitrage.supercharge": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supercharging is cheaper right now"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Superlading er billigere nå"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Superlading er billigere nå"
           }
         }
       }
     },
-    "nordic.passStatus.closed" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pass closed"
+    "nordic.passStatus.closed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pass closed"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fjellovergangen er stengt"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fjellovergangen er stengt"
           }
         }
       }
     },
-    "nordic.passStatus.open" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pass open"
+    "nordic.passStatus.open": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pass open"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fjellovergangen er åpen"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fjellovergangen er åpen"
           }
         }
       }
     },
-    "nordic.passStatus.restricted" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restrictions apply"
+    "nordic.passStatus.restricted": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restrictions apply"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restriksjoner gjelder"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restriksjoner gjelder"
           }
         }
       }
     },
-    "nordic.spotPrice.label" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spot price (NO)"
+    "nordic.spotPrice.label": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spot price (NO)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spotpris (NO)"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotpris (NO)"
           }
         }
       }
     },
-    "plug.ccs2" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CCS2"
+    "plug.ccs2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CCS2"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CCS2"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CCS2"
           }
         }
       }
     },
-    "plug.chademo" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CHAdeMO"
+    "plug.chademo": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CHAdeMO"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CHAdeMO"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CHAdeMO"
           }
         }
       }
     },
-    "plug.nacs" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "NACS (Tesla)"
+    "plug.nacs": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NACS (Tesla)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "NACS (Tesla)"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NACS (Tesla)"
           }
         }
       }
     },
-    "plug.type2" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Type 2"
+    "plug.type2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type 2"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Type 2"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type 2"
           }
         }
       }
     },
-    "Settings" : {
-      "comment" : "A label for the settings tab in the app.",
-      "isCommentAutoGenerated" : true
+    "Settings": {
+      "comment": "A label for the settings tab in the app.",
+      "isCommentAutoGenerated": true
     },
-    "settings.credits" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Credits"
+    "settings.credits": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Credits"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Henvisninger"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Henvisninger"
           }
         }
       }
     },
-    "settings.title" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
+    "settings.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Innstillinger"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Innstillinger"
           }
         }
       }
     },
-    "settings.yourData" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your Data"
+    "settings.yourData": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Data"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dine data"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dine data"
           }
         }
       }
     },
-    "sort.distance" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Distance"
+    "sort.distance": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distance"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avstand"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avstand"
           }
         }
       }
     },
-    "sort.maxKilowatts" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Max Power"
+    "sort.maxKilowatts": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Max Power"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maks effekt"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maks effekt"
           }
         }
       }
     },
-    "sort.name" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Name"
+    "sort.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navn"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Navn"
           }
         }
       }
     },
-    "sort.recentlyVerified" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recently Verified"
+    "sort.recentlyVerified": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recently Verified"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nylig verifisert"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nylig verifisert"
           }
         }
       }
     },
-    "sort.stallCount" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stall Count"
+    "sort.stallCount": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stall Count"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Antall ladestasjoner"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antall ladestasjoner"
           }
         }
       }
     },
-    "status.closed" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Closed"
+    "status.closed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Closed"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stengt"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stengt"
           }
         }
       }
     },
-    "status.construction" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Construction"
+    "status.construction": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Construction"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Under bygging"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Under bygging"
           }
         }
       }
     },
-    "status.open" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open"
+    "status.open": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Åpen"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Åpen"
           }
         }
       }
     },
-    "status.permit" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permit"
+    "status.permit": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permit"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tillatelse"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tillatelse"
           }
         }
       }
     },
-    "status.plan" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Planned"
+    "status.plan": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planned"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Planlagt"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planlagt"
           }
         }
       }
     },
-    "tab.list" : {
-      "comment" : "Tab bar: list view",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "List"
+    "tab.list": {
+      "comment": "Tab bar: list view",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "List"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Liste"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liste"
           }
         }
       }
     },
-    "tab.map" : {
-      "comment" : "Tab bar: map view",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Map"
+    "tab.map": {
+      "comment": "Tab bar: map view",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Map"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kart"
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kart"
           }
         }
       }
     },
-    "The nearest %@Supercharger is %@%@." : {
-      "comment" : "Spoken response to the user when the nearest Supercharger is found. The first argument is the generation type (e.g. \"V4\"). The second argument is the name of the Supercharger. The third argument is the string “, %arg km away” or the string “”.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "The nearest %1$@Supercharger is %2$@%3$@."
+    "The nearest %@Supercharger is %@%@.": {
+      "comment": "Spoken response to the user when the nearest Supercharger is found. The first argument is the generation type (e.g. \"V4\"). The second argument is the name of the Supercharger. The third argument is the string “, %arg km away” or the string “”.",
+      "isCommentAutoGenerated": true,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "The nearest %1$@Supercharger is %2$@%3$@."
           }
         }
       }
     },
-    "V2 (up to 150 kW)" : {
-      "comment" : "Description of a supercharger generation when it is V2.",
-      "isCommentAutoGenerated" : true
+    "V2 (up to 150 kW)": {
+      "comment": "Description of a supercharger generation when it is V2.",
+      "isCommentAutoGenerated": true
     },
-    "V3 (up to 250 kW)" : {
-      "comment" : "Description of a supercharger generation case.",
-      "isCommentAutoGenerated" : true
+    "V3 (up to 250 kW)": {
+      "comment": "Description of a supercharger generation case.",
+      "isCommentAutoGenerated": true
     },
-    "V4 (up to 325 kW)" : {
-      "comment" : "Case display representation for the \"V4\" supercharger generation.",
-      "isCommentAutoGenerated" : true
+    "V4 (up to 325 kW)": {
+      "comment": "Case display representation for the \"V4\" supercharger generation.",
+      "isCommentAutoGenerated": true
     }
   },
-  "version" : "1.1"
+  "version": "1.1"
 }
