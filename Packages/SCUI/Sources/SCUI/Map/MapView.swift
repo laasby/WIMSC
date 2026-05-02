@@ -129,10 +129,11 @@ public struct MapView: View {
         VStack(spacing: 0) {
             Spacer()
 
-            // Bottom bar: filter chips + recenter button
+            // Bottom bar: filter chips + zoom controls + recenter button
             HStack(alignment: .center, spacing: 12) {
                 filterChipsRow
                 Spacer()
+                zoomControls
                 recenterButton
             }
             .padding(.horizontal, 16)
@@ -186,6 +187,38 @@ public struct MapView: View {
                 .padding(.horizontal, 4)
             }
         }
+    }
+
+    // MARK: - Zoom controls
+
+    private var zoomControls: some View {
+        HStack(spacing: 0) {
+            zoomButton(systemImage: "plus", action: { zoom(factor: 0.5) })
+            Divider()
+                .frame(height: 22)
+                .foregroundStyle(.secondary)
+            zoomButton(systemImage: "minus", action: { zoom(factor: 2.0) })
+        }
+        .background(.regularMaterial, in: Capsule())
+        .shadow(radius: 4, y: 2)
+    }
+
+    private func zoomButton(systemImage: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .font(.system(size: 16, weight: .semibold))
+                .frame(width: 44, height: 44)
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func zoom(factor: Double) {
+        let newSpan = MKCoordinateSpan(
+            latitudeDelta:  max(0.002, min(160, currentRegion.span.latitudeDelta  * factor)),
+            longitudeDelta: max(0.002, min(360, currentRegion.span.longitudeDelta * factor))
+        )
+        let newRegion = MKCoordinateRegion(center: currentRegion.center, span: newSpan)
+        withAnimation { mapCameraPosition = .region(newRegion) }
     }
 
     // MARK: - Recenter button

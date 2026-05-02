@@ -230,8 +230,31 @@ public struct SuperchargerDetailView: View {
             DetailRow(label: "Stalls", value: "\(supercharger.stallCount)")
             DetailRow(label: "Max Power", value: "\(supercharger.maxKilowatts) kW")
             DetailRow(label: "Plug Types", value: plugText)
-            DetailRow(label: "Magic Dock / NACS+CCS", value: supercharger.hasMagicDock ? "✓" : "—")
-            DetailRow(label: "Pull-Through", value: supercharger.hasPullThrough ? "✓" : "—")
+            if supercharger.hasMagicDock {
+                DetailRow(label: "Magic Dock", value: "✓ NACS + CCS adapter")
+            }
+            if supercharger.otherEVs {
+                DetailRow(label: "Non-Tesla EVs", value: "✓ Open to all")
+            }
+            if supercharger.hasPullThrough {
+                DetailRow(label: "Pull-Through", value: "✓")
+            }
+            if let facility = supercharger.facilityName {
+                DetailRow(label: "Located at", value: facility)
+            }
+            if let hours = supercharger.facilityHours, !hours.isEmpty {
+                DetailRow(label: "Facility Hours", value: formatFacilityHours(hours))
+            }
+            if supercharger.solarCanopy || supercharger.hasBattery {
+                let badges = [
+                    supercharger.solarCanopy ? "☀️ Solar Canopy" : nil,
+                    supercharger.hasBattery  ? "🔋 Battery Backup" : nil,
+                ].compactMap { $0 }.joined(separator: "  ")
+                DetailRow(label: "Green Features", value: badges)
+            }
+            if let elev = supercharger.elevationMeters {
+                DetailRow(label: "Elevation", value: "\(elev) m")
+            }
             if supercharger.hasGatedAccess {
                 DetailRow(
                     label: "Gated Access",
@@ -239,6 +262,12 @@ public struct SuperchargerDetailView: View {
                 )
             }
         }
+    }
+
+    private func formatFacilityHours(_ raw: String) -> String {
+        // "7x24" → "24/7"
+        if raw.lowercased() == "7x24" || raw.lowercased() == "24x7" { return "24/7" }
+        return raw
     }
 
     private func plugTypeLabel(_ plug: PlugType) -> String {

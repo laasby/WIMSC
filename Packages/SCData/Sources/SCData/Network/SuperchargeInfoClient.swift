@@ -21,6 +21,13 @@ public struct SuperchargerDTO: Decodable {
     public let stalls: [String: Int]?
     /// plugs dict e.g. {"ccs2": 16, "nacs": 4}
     public let plugs: [String: Int]?
+    public let facilityName: String?
+    public let facilityHours: String?
+    public let solarCanopy: Bool?
+    public let battery: Bool?
+    public let elevationMeters: Int?
+    public let plugshareId: Int?
+    public let dateOpened: String?
 
     public struct AddressDTO: Decodable {
         public let street: String?
@@ -112,7 +119,12 @@ public struct SuperchargerDTO: Decodable {
         let stallsCount = stallCount ?? 0
         let is24 = open24Hr ?? true
         let pullThrough = siteAmenities.contains(.pullThrough)
-        
+
+        // Parse opening date
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd"
+        let opened: Date? = dateOpened.flatMap { df.date(from: $0) }
+
         return Supercharger(
             id: siteId,
             name: name,
@@ -133,7 +145,15 @@ public struct SuperchargerDTO: Decodable {
             gatedAccessNotes: accessNotes,
             amenities: siteAmenities,
             hasPullThrough: pullThrough,
+            facilityName: facilityName,
+            facilityHours: facilityHours,
+            solarCanopy: solarCanopy ?? false,
+            hasBattery: battery ?? false,
+            elevationMeters: elevationMeters,
+            plugshareId: plugshareId,
+            otherEVs: otherEVs ?? false,
             dataSource: .superchargeInfo,
+            openedDate: opened,
             lastSyncedAt: .now
         )
     }

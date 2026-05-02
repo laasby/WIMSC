@@ -29,6 +29,20 @@ public final class Supercharger {
     public var pricing: PricingInfo?
     public var amenities: [Amenity]
     public var hasPullThrough: Bool
+    /// Name of the host facility (e.g. "IKEA", "Harris Teeter")
+    public var facilityName: String?
+    /// Operating hours of the host facility (e.g. "7x24", "Mon-Fri 8-22")
+    public var facilityHours: String?
+    /// Site has a solar canopy over stalls
+    public var solarCanopy: Bool
+    /// Site has on-site battery storage
+    public var hasBattery: Bool
+    /// Elevation of the site in metres
+    public var elevationMeters: Int?
+    /// PlugShare location ID for cross-referencing
+    public var plugshareId: Int?
+    /// Whether non-Tesla EVs can charge here
+    public var otherEVs: Bool
     @Relationship(deleteRule: .cascade)
     public var photos: [SitePhoto]
     /// Community notes stored as Codable embedded values.
@@ -66,6 +80,13 @@ public final class Supercharger {
         pricing: PricingInfo? = nil,
         amenities: [Amenity] = [],
         hasPullThrough: Bool = false,
+        facilityName: String? = nil,
+        facilityHours: String? = nil,
+        solarCanopy: Bool = false,
+        hasBattery: Bool = false,
+        elevationMeters: Int? = nil,
+        plugshareId: Int? = nil,
+        otherEVs: Bool = false,
         photos: [SitePhoto] = [],
         communityNotes: [CommunityNote] = [],
         lastVerifiedDate: Date? = nil,
@@ -98,6 +119,13 @@ public final class Supercharger {
         self.pricing = pricing
         self.amenities = amenities
         self.hasPullThrough = hasPullThrough
+        self.facilityName = facilityName
+        self.facilityHours = facilityHours
+        self.solarCanopy = solarCanopy
+        self.hasBattery = hasBattery
+        self.elevationMeters = elevationMeters
+        self.plugshareId = plugshareId
+        self.otherEVs = otherEVs
         self.photos = photos
         self.communityNotes = communityNotes
         self.lastVerifiedDate = lastVerifiedDate
