@@ -23,7 +23,7 @@ public enum GenerationPinStyle {
         switch generation {
         case .v4:      return "bolt.fill"
         case .v3:      return "bolt"
-        case .v2:      return "bolt.slash"
+        case .v2:      return "bolt.fill"
         case .unknown: return "questionmark.circle"
         }
     }

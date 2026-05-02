@@ -137,15 +137,15 @@ public struct MapView: View {
             currentRegion = context.region
             regionBinding?.wrappedValue = context.region
             let region = context.region
-            Task { await viewModel.loadAnnotations(in: region) }
-            if isAuthenticated {
-                let center = context.region.center
-                let allSites = viewModel.annotations.map { $0.supercharger }
-                Task {
+            let center = context.region.center
+            let authenticated = isAuthenticated
+            Task {
+                await viewModel.loadAnnotations(in: region)
+                if authenticated {
                     await liveStore.refresh(
                         latitude: center.latitude,
                         longitude: center.longitude,
-                        allSites: allSites
+                        allSites: viewModel.annotations.map { $0.supercharger }
                     )
                 }
             }

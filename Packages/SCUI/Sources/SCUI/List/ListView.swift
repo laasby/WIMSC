@@ -92,8 +92,7 @@ public struct ListView: View {
                 SuperchargerDetailView(supercharger: site, locationService: locationService)
             }
         }
-        .task(id: visibleRegion.center.latitude) { await loadSites() }
-        .task(id: visibleRegion.center.longitude) { await loadSites() }
+        .task(id: visibleRegion.center.latitude + visibleRegion.center.longitude) { await loadSites() }
     }
 
     private func loadSites() async {

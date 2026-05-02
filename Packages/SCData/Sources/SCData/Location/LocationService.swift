@@ -52,11 +52,13 @@ public final class LocationService: NSObject {
 
 extension LocationService: CLLocationManagerDelegate {
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        updateAuthStatus(manager.authorizationStatus)
+        let status = manager.authorizationStatus
+        Task { @MainActor in self.updateAuthStatus(status) }
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        currentLocation = locations.last
+        guard let location = locations.last else { return }
+        Task { @MainActor in self.currentLocation = location }
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
