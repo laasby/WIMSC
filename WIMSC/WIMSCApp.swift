@@ -64,7 +64,9 @@ private struct AppRootView: View {
 
 // MARK: - Tesla environment modifier
 // Using a ViewModifier lets the compiler type-check each .environment call independently.
+// @MainActor ensures TeslaAuthService (also @MainActor) is safely captured in @Sendable closures.
 
+@MainActor
 private struct TeslaEnvironmentModifier: ViewModifier {
     let teslaAuth: TeslaAuthService
     let liveStore: LiveAvailabilityStore
