@@ -192,11 +192,17 @@ public struct SuperchargerDetailView: View {
 
     private var availabilitySection: some View {
         let live = liveStore.availabilityFor(supercharger)
+        let stalls = supercharger.stallCount
+        let waitDesc: String = {
+            if stalls >= 20 { return "Usually short waits at this large site" }
+            if stalls >= 10 { return "Typically a short wait during peak hours" }
+            return "May have waits during busy periods"
+        }()
         return DetailSection(title: "Availability") {
             AvailabilityView(
-                availability: availability,
-                stallCount: supercharger.stallCount,
-                waitDescription: waitDescription,
+                availability: nil,
+                stallCount: stalls,
+                waitDescription: waitDesc,
                 liveAvailableStalls: live?.availableStalls,
                 liveTotalStalls: live?.totalStalls,
                 liveLastRefreshed: liveStore.lastRefreshed,
