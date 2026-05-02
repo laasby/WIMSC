@@ -24,7 +24,6 @@
 		4A000000000000000000A015 /* ActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A000000000000000000A007 /* ActivityKit.framework */; };
 		4A000000000000000000A016 /* WIMSCWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4A000000000000000000A001 /* WIMSCWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4A150000000000000000B002 /* FindNearestSuperchargerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A150000000000000000B001 /* FindNearestSuperchargerIntent.swift */; };
-		4A160000C001000000000002 /* TeslaAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A160000C001000000000001 /* TeslaAuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +77,6 @@
 		4A000000000000000000A006 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		4A000000000000000000A007 /* ActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActivityKit.framework; path = System/Library/Frameworks/ActivityKit.framework; sourceTree = SDKROOT; };
 		4A150000000000000000B001 /* FindNearestSuperchargerIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindNearestSuperchargerIntent.swift; sourceTree = "<group>"; };
-		4A160000C001000000000001 /* TeslaAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeslaAuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,7 +194,6 @@
 		4A160000C001000000000003 /* Tesla */ = {
 			isa = PBXGroup;
 			children = (
-				4A160000C001000000000001 /* TeslaAuthService.swift */,
 			);
 			path = Tesla;
 			sourceTree = "<group>";
@@ -340,7 +337,6 @@
 				4A0000000000000000000030 /* WIMSCApp.swift in Sources */,
 				4A0000000000000000000031 /* ContentView.swift in Sources */,
 				4A150000000000000000B002 /* FindNearestSuperchargerIntent.swift in Sources */,
-				4A160000C001000000000002 /* TeslaAuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
